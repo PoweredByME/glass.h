@@ -1,0 +1,22 @@
+ >> First download the glut files from google code using the 
+    link(https://code.google.com/p/rawvideoplayer/downloads/detail?name=glut-3.7.6-bin.zip&can=2)
+    
+  >> Open the bin folder using windows 10 or 7zip or Winrar
+  
+  >> Copy the glut32.dll file to C:\Windows\System32 and C:\Windows\System.
+     (i.e. Go to OS file or C file, the go to windows folder, then search for system32 and paste glut32.dll in it, then 
+    go back to windows folder and search for system folder and paste the glut32.dll in it)
+    
+  >> Go back to the glut folder. Copy the glut.lib (Object File Liberary) and the goto the program files(x86) if you are using visual 
+  studio 2013 the search for folder Microsoft Visual Studio 12.0 and select it. Now goto folder VC, then in it goto folder lib and paste 
+  glut.lib in it.
+  
+  >> Now, come back to glut folder, copy glut.h (header file), then go back to the folder Microsoft Visual Studio 12.0
+  , then goto folder VC, in it select folder VC, and then go to the folder include and paste glut.h in it.
+  
+  >> Now go to glass.h folder, copy glass.h (header file) in the same folder(include) where you have pasted glut.h.
+  
+  
+       >> Hopefully the glass.h will run on your visual studio.
+       
+       @happy #include<glass.h>
