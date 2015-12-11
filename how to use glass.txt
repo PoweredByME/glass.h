@@ -1,7 +1,9 @@
 
 glass.h
-Try every code like presented in the following example… you will grasp the basics of graphics and animation… It is a derived from glut so it contains the powers of glut…. You may use the codes and functions of glut too.
-How to start the coding is the first activation barrier in the field of programming…. For glass do something like this.
+Try every code like presented in the following example… you will grasp the basics of graphics and animation…
+It is a derived from glut so it contains the powers of glut…. You may use the codes and functions of glut too.
+How to start the coding is the first activation barrier in the field of programming…. 
+For glass do something like this.
 
 #include<glass.h>
 void main(int argc, char** argv)
@@ -18,10 +20,13 @@ refreshScreen();
 
 
 
-Well what is (int argc and char** argv). For now just consider it to be a requirement of syntax. These are required to project a graphics window on the screen.
+Well what is (int argc and char** argv). For now just consider it to be a requirement of syntax. 
+These are required to project a graphics window on the screen.
 
 Now, as per common sense the mainWindow function generates the main Window for you graphics. 
-You just write the argc and argv as it is… they are mandatory.  What is 400 and 500, well 400 is the height of window and and 500 is the width of window and “Red”  this defines the color of window, background color I mean.
+You just write the argc and argv as it is… they are mandatory.
+What is 400 and 500, well 400 is the height of window and and 500 is the width of window
+and “Red”  this defines the color of window, background color I mean.
 
 
 
@@ -35,16 +40,27 @@ You just write the argc and argv as it is… they are mandatory.  What is 400 an
 
 Now what the hell is void myDisplayFunction()
 
-It is something mandatory, too. Is the function that is implicitly called by mainWindow function from main so you don’t have to call in main. It is the function in which you entire code will be written and displayed on the graphic screen. 
+It is something mandatory, too. Is the function that is implicitly called by mainWindow function
+from main so you don’t have to call in main. It is the function in which you entire code will be 
+written and displayed on the graphic screen. 
 
-Notice: the display function is just like a loop that repeats itself as long as you program runs on the screen.It is called by the mainWindow  function 60times per second.  So whatever logic you make for your code…. Keep this point in you mind.
-You will write the body of your code in between the ScreenClear() function and refreshScreen() function. They are mandatory too….. 
+Notice: the display function is just like a loop that repeats itself as long as you program runs
+on the screen.It is called by the mainWindow  function 60times per second.  So
+whatever logic you make for your code…. Keep this point in you mind.
+You will write the body of your code in between the ScreenClear() function
+and refreshScreen() function. They are mandatory too….. 
 
 
-Here are the functions of glass till now… we will try to add more too. If you make some awesome to extend glass… feel free to add it to it with your name if you want.
+Here are the functions of glass till now… we will try to add more too. 
+If you make some awesome to extend glass… feel free to add it to it with 
+your name if you want.
 
 Text (  x-coordinate, y-coordinate,  ”text string” , ”Color”, “Bold” )
-Function is used to print text on screen. Takes 5 parameters . First 2 parameters are coordinates are x and y coordinates of screen which will define the starting point of text, 3 parameter is desired text , 4 parameter is color of text and 5 parameter is attribute to make text bold and it is not mandatory you can skip it as well. The code will be like.
+Function is used to print text on screen. Takes 5 parameters . First 2 parameters are coordinates
+are x and y coordinates of screen which will define the starting point of text, 
+3 parameter is desired text , 4 parameter is color of text and 5 parameter is 
+attribute to make text bold and it is not mandatory you can skip it as well. The code will be like.
+
 x-coordinate, y-coordinate are the coordinated of the lower left corner of the text block.
 
 
