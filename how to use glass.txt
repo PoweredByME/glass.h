@@ -56,11 +56,12 @@ If you make some awesome to extend glass… feel free to add it to it with
 your name if you want.
 
 >>Text (  x-coordinate, y-coordinate,  ”text string” , ”Color”, “Bold” )
+
 Function is used to print text on screen. Takes 5 parameters . First 2 parameters are coordinates
 are x and y coordinates of screen which will define the starting point of text, 
 3 parameter is desired text , 4 parameter is color of text and 5 parameter is 
 attribute to make text bold and it is not mandatory you can skip it as well. The code will be like.
-
+The text string can be an int or a long but it cannot be float or double.
 x-coordinate, y-coordinate are the coordinated of the lower left corner of the text block.
 
 
