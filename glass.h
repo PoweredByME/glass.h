@@ -1,5 +1,3 @@
-
-
 // The liberary is powered by M.E.//
 
 // Please use this code, modify it, wit each modification write your name with it, learn form it and expand it//
@@ -49,6 +47,15 @@ void ScreenClear() // to clear screen
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
+
+void SetState(char *state) // for setting the state
+{
+	if (strcmp(state, "Filled") == 0)
+		glBegin(GL_POLYGON);
+	if (strcmp(state, "Hollow") == 0)
+		glBegin(GL_LINE_STRIP);
+}
+
 void SetColor(char *name) // function to set color
 {
 	if (strcmp(name, "Black") == 0)
@@ -87,15 +94,38 @@ void SetColor(char *name) // function to set color
 	{
 		glColor3f(1.0, 0.5, 0.0);
 	}
-
-}
-
-void SetState(char *state) // for setting the state
-{
-	if (strcmp(state, "Filled") == 0)
-		glBegin(GL_POLYGON);
-	if (strcmp(state, "Hollow") == 0)
-		glBegin(GL_LINE_STRIP);
+	else if (strcmp(name, "DarkRed") == 0)
+	{
+		glColor4f(1.0, 0.0, 0.0, 0.9);
+	}
+	else if (strcmp(name, "GreenishYellow") == 0)
+	{
+		glColor3f(0.5,1.0,0.0);
+	}
+	else if (strcmp(name, "LightGreen") == 0)
+	{
+		glColor3f(0.5, 1.0, 0.5);
+	}
+	else if (strcmp(name, "DarkGreen") == 0)
+	{
+		glColor3f(0.0, 0.5, 0.0);
+	}
+	else if (strcmp(name, "Brown") == 0)
+	{
+		glColor3f(0.5, 0.35, 0.05);
+	}
+	else if (strcmp(name, "Grey") == 0)
+	{
+		glColor4f(0.8, 0.8, 0.8,1.0);
+	}
+	else if (strcmp(name, "DarkGrey") == 0)
+	{
+		glColor4f(0.2, 0.2, 0.2,1.0);
+	}
+	else if (strcmp(name, "Magenta") == 0)
+	{
+		glColor3f(1.0, 0.0, 1.0);
+	}
 }
 
 void CreateRectangle(int x, int y, int height, int lenght, char * name, char * state)
@@ -122,9 +152,6 @@ void CreateTriangle(int x1, int y1, int x2, int y2, int x3, int y3, char * name,
 	glVertex2f(x3, y3);
 	glVertex2f(x1, y1);
 	glEnd();
-
-
-
 }
 
 void DrawLine(float x1, float y1, float x2, float y2, char * name)
@@ -134,9 +161,6 @@ void DrawLine(float x1, float y1, float x2, float y2, char * name)
 	glVertex2f(x1, y1);
 	glVertex2f(x2, y2);
 	glEnd();
-
-
-
 }
 
 void CreateCircle(int x, int y, int radius, char * name, char *state){
@@ -398,7 +422,26 @@ void CreateCircle(double x, double y, double radius, char * name, char *state){
 	glEnd();
 }
 
+void CreateTriangle(double x1, double y1, double x2, double y2, double x3, double y3, char * name, char * state)
+{
+	SetState(state);
+	SetColor(name);
+	glVertex2f(x1, y1);
+	glVertex2f(x2, y2);
+	glVertex2f(x3, y3);
+	glVertex2f(x1, y1);
+	glEnd();
+}
 
-
-
+void CreateRectangle(double x, double y, double height, double lenght, char * name, char * state)
+{
+    SetState(state);
+	SetColor(name);
+	glVertex2f(x, y);
+	glVertex2f(x + lenght, y);
+	glVertex2f(x + lenght, y + height);
+	glVertex2f(x, y + height);
+	glVertex2f(x, y);
+	glEnd();
+}
 
