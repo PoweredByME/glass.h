@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <string.h>
+#include<stdlib.h>
 #include <math.h>
 #define M_PI 3.14159265358979323846f
 #define LEFT  GLUT_LEFT_BUTTON
@@ -40,6 +41,8 @@
 #define CONTROL GLUT_ACTIVE_CTRL
 #define ALT GLUT_ACTIVE_ALT
 #define SHIFT GLUT_ACTIVE_SHIFT
+
+
 
 void ScreenClear() // to clear screen
 {
@@ -186,7 +189,7 @@ int mouse_b = 0;	// mouse buttons
 char Keyboard;
 int Key = 0;
 int SpecialKey = 0;
-int ModKey = 0; 
+int ModKey = 0;
 
 
 int Amotion_x = 0;
@@ -348,3 +351,54 @@ void refreshScreen()
 }
 
 // This code is written by Ali Danish. A Student of NUST H-12 pakistan
+
+// this code is written by Saad Ahmad 
+
+void Text(int x, int y, int text, char *name, char *style = "NULL")
+{
+	char e[20];
+	_itoa_s(text, e, 10);
+	Text(x, y, e, name, style);
+}
+
+void Text(double x, double y, int text, char *name, char *style = "NULL")
+{
+	char e[20];
+	_itoa_s(text, e, 10);
+	Text(x, y, e, name, style);
+}
+
+
+
+void Text(int x, int y, long text, char *name, char *style = "NULL")
+{
+	char e[20];
+	_itoa_s(text, e, 10);
+	Text(x, y, e, name, style);
+}
+
+void Text(float x, float y, long text, char *name, char *style = "NULL")
+{
+	char e[20];
+	_itoa_s(text, e, 10);
+	Text(x, y, e, name, style);
+}
+
+void CreateCircle(double x, double y, double radius, char * name, char *state){
+	float angle;
+	SetState(state);
+	SetColor(name);
+	glLineWidth(1.0f);
+
+	for (int i = 0; i < 100; i++)
+	{
+		angle = i * 2 * M_PI / 100;
+		glVertex2f(x + (cos(angle) * radius), y + (sin(angle) * radius));
+	}
+	glEnd();
+}
+
+
+
+
+
