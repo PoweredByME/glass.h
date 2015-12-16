@@ -39,7 +39,7 @@
 #define CONTROL GLUT_ACTIVE_CTRL
 #define ALT GLUT_ACTIVE_ALT
 #define SHIFT GLUT_ACTIVE_SHIFT
-
+#define ENTER 13;
 
 
 void ScreenClear() // to clear screen
@@ -143,23 +143,23 @@ void CreateRectangle(int x, int y, int height, int lenght, char * name, char * s
 
 }
 
-void CreateTriangle(int x1, int y1, int x2, int y2, int x3, int y3, char * name, char * state)
+void CreateTriangle(int __x1, int __y1, int __x2, int __y2, int __x3, int __y3, char * name, char * state)
 {
 	SetState(state);
 	SetColor(name);
-	glVertex2f(x1, y1);
-	glVertex2f(x2, y2);
-	glVertex2f(x3, y3);
-	glVertex2f(x1, y1);
+	glVertex2f(__x1, __y1);
+	glVertex2f(__x2, __y2);
+	glVertex2f(__x3, __y3);
+	glVertex2f(__x1, __y1);
 	glEnd();
 }
 
-void DrawLine(float x1, float y1, float x2, float y2, char * name)
+void DrawLine(float __x1, float __y1, float __x2, float __y2, char * name)
 {
 	glBegin(GL_LINES);
 	SetColor(name);
-	glVertex2f(x1, y1);
-	glVertex2f(x2, y2);
+	glVertex2f(__x1, __y1);
+	glVertex2f(__x2, __y2);
 	glEnd();
 }
 
@@ -283,6 +283,38 @@ void mainWindow(int argc, char**argv, int height, int width, char *name)
 	else if (strcmp(name, "Orange") == 0)
 	{
 		glClearColor(1.0, 0.5, 0.0, 0.0);
+	}
+	else if (strcmp(name, "DarkRed") == 0)
+	{
+		glClearColor(1.0, 0.0, 0.0, 0.9);
+	}
+	else if (strcmp(name, "GreenishYellow") == 0)
+	{
+		glClearColor(0.5, 1.0, 0.0,0.0);
+	}
+	else if (strcmp(name, "LightGreen") == 0)
+	{
+		glClearColor(0.5, 1.0, 0.5, 0.0);
+	}
+	else if (strcmp(name, "DarkGreen") == 0)
+	{
+		glClearColor(0.0, 0.5, 0.0, 0.0);
+	}
+	else if (strcmp(name, "Brown") == 0)
+	{
+		glClearColor(0.5, 0.35, 0.05, 0.0);
+	}
+	else if (strcmp(name, "Grey") == 0)
+	{
+		glClearColor(0.8, 0.8, 0.8, 1.0);
+	}
+	else if (strcmp(name, "DarkGrey") == 0)
+	{
+		glClearColor(0.2, 0.2, 0.2, 1.0);
+	}
+	else if (strcmp(name, "Magenta") == 0)
+	{
+		glClearColor(1.0, 0.0, 1.0,0.0);
 	}
 	else
 		glClearColor(0.0, 0.0, 0.0, 0.0);		//background color of openGl window
@@ -422,14 +454,42 @@ void CreateCircle(double x, double y, double radius, char * name, char *state){
 	glEnd();
 }
 
-void CreateTriangle(double x1, double y1, double x2, double y2, double x3, double y3, char * name, char * state)
+void CreateCircle(int x, int y, double radius, char * name, char *state){
+	float angle;
+	SetState(state);
+	SetColor(name);
+	glLineWidth(1.0f);
+
+	for (int i = 0; i < 100; i++)
+	{
+		angle = i * 2 * M_PI / 100;
+		glVertex2f(x + (cos(angle) * radius), y + (sin(angle) * radius));
+	}
+	glEnd();
+}
+
+void CreateCircle(double x, double y, int radius, char * name, char *state){
+	float angle;
+	SetState(state);
+	SetColor(name);
+	glLineWidth(1.0f);
+
+	for (int i = 0; i < 100; i++)
+	{
+		angle = i * 2 * M_PI / 100;
+		glVertex2f(x + (cos(angle) * radius), y + (sin(angle) * radius));
+	}
+	glEnd();
+}
+
+void CreateTriangle(double __x1, double __y1, double __x2, double __y2, double __x3, double __y3, char * name, char * state)
 {
 	SetState(state);
 	SetColor(name);
-	glVertex2f(x1, y1);
-	glVertex2f(x2, y2);
-	glVertex2f(x3, y3);
-	glVertex2f(x1, y1);
+	glVertex2f(__x1, __y1);
+	glVertex2f(__x2, __y2);
+	glVertex2f(__x3, __y3);
+	glVertex2f(__x1, __y1);
 	glEnd();
 }
 
@@ -445,3 +505,215 @@ void CreateRectangle(double x, double y, double height, double lenght, char * na
 	glEnd();
 }
 
+void InputText(double x, double y, char* nameofstring, int sizeofstring, char* color)
+{
+	int a=strlen(nameofstring);
+	char* stringText = (char*)calloc(sizeofstring+1, 4);
+	stringText = nameofstring;
+		if (Keyboard == '\b')
+		{
+			strncpy_s(nameofstring, sizeofstring, stringText, (strlen(stringText) - 1));
+		}
+
+		if (a != sizeofstring-1)
+		{
+		if (Keyboard == 'a')
+			strcat_s(nameofstring, sizeofstring, "a");
+		else if (Keyboard == 'b')
+			strcat_s(nameofstring, sizeofstring, "b");
+		else if (Keyboard == 'c')
+			strcat_s(nameofstring, sizeofstring, "c");
+		else if (Keyboard == 'd')
+			strcat_s(nameofstring, sizeofstring, "d");
+		else if (Keyboard == 'e')
+			strcat_s(nameofstring, sizeofstring, "e");
+		else if (Keyboard == 'f')
+			strcat_s(nameofstring, sizeofstring, "f");
+		else if (Keyboard == 'g')
+			strcat_s(nameofstring, sizeofstring, "g");
+		else if (Keyboard == 'h')
+			strcat_s(nameofstring, sizeofstring, "h");
+		else if (Keyboard == 'i')
+			strcat_s(nameofstring, sizeofstring, "i");
+		else if (Keyboard == 'j')
+			strcat_s(nameofstring, sizeofstring, "j");
+		else if (Keyboard == 'k')
+			strcat_s(nameofstring, sizeofstring, "k");
+		else if (Keyboard == 'l')
+			strcat_s(nameofstring, sizeofstring, "l");
+		else if (Keyboard == 'm')
+			strcat_s(nameofstring, sizeofstring, "m");
+		else if (Keyboard == 'n')
+			strcat_s(nameofstring, sizeofstring, "n");
+		else if (Keyboard == 'o')
+			strcat_s(nameofstring, sizeofstring, "o");
+		else if (Keyboard == 'p')
+			strcat_s(nameofstring, sizeofstring, "p");
+		else if (Keyboard == 'q')
+			strcat_s(nameofstring, sizeofstring, "q");
+		else if (Keyboard == 'r')
+			strcat_s(nameofstring, sizeofstring, "r");
+		else if (Keyboard == 's')
+			strcat_s(nameofstring, sizeofstring, "s");
+		else if (Keyboard == 't')
+			strcat_s(nameofstring, sizeofstring, "t");
+		else if (Keyboard == 'u')
+			strcat_s(nameofstring, sizeofstring, "u");
+		else if (Keyboard == 'v')
+			strcat_s(nameofstring, sizeofstring, "v");
+		else if (Keyboard == 'w')
+			strcat_s(nameofstring, sizeofstring, "w");
+		else if (Keyboard == 'x')
+			strcat_s(nameofstring, sizeofstring, "x");
+		else if (Keyboard == 'y')
+			strcat_s(nameofstring, sizeofstring, "y");
+		else if (Keyboard == 'z')
+			strcat_s(nameofstring, sizeofstring, "z");
+		else if (Keyboard == ' ')
+			strcat_s(nameofstring, sizeofstring, " ");
+		else if (Keyboard == 'A')
+			strcat_s(nameofstring, sizeofstring, "A");
+		else if (Keyboard == 'B')
+			strcat_s(nameofstring, sizeofstring, "B");
+		else if (Keyboard == 'C')
+			strcat_s(nameofstring, sizeofstring, "C");
+		else if (Keyboard == 'D')
+			strcat_s(nameofstring, sizeofstring, "D");
+		else if (Keyboard == 'E')
+			strcat_s(nameofstring, sizeofstring, "E");
+		else if (Keyboard == 'F')
+			strcat_s(nameofstring, sizeofstring, "F");
+		else if (Keyboard == 'G')
+			strcat_s(nameofstring, sizeofstring, "G");
+		else if (Keyboard == 'H')
+			strcat_s(nameofstring, sizeofstring, "H");
+		else if (Keyboard == 'I')
+			strcat_s(nameofstring, sizeofstring, "I");
+		else if (Keyboard == 'J')
+			strcat_s(nameofstring, sizeofstring, "J");
+		else if (Keyboard == 'K')
+			strcat_s(nameofstring, sizeofstring, "K");
+		else if (Keyboard == 'L')
+			strcat_s(nameofstring, sizeofstring, "L");
+		else if (Keyboard == 'M')
+			strcat_s(nameofstring, sizeofstring, "M");
+		else if (Keyboard == 'N')
+			strcat_s(nameofstring, sizeofstring, "N");
+		else if (Keyboard == 'O')
+			strcat_s(nameofstring, sizeofstring, "O");
+		else if (Keyboard == 'P')
+			strcat_s(nameofstring, sizeofstring, "P");
+		else if (Keyboard == 'Q')
+			strcat_s(nameofstring, sizeofstring, "Q");
+		else if (Keyboard == 'R')
+			strcat_s(nameofstring, sizeofstring, "R");
+		else if (Keyboard == 'S')
+			strcat_s(nameofstring, sizeofstring, "S");
+		else if (Keyboard == 'T')
+			strcat_s(nameofstring, sizeofstring, "T");
+		else if (Keyboard == 'U')
+			strcat_s(nameofstring, sizeofstring, "U");
+		else if (Keyboard == 'V')
+			strcat_s(nameofstring, sizeofstring, "V");
+		else if (Keyboard == 'W')
+			strcat_s(nameofstring, sizeofstring, "W");
+		else if (Keyboard == 'X')
+			strcat_s(nameofstring, sizeofstring, "X");
+		else if (Keyboard == 'Y')
+			strcat_s(nameofstring, sizeofstring, "Y");
+		else if (Keyboard == 'Z')
+			strcat_s(nameofstring, sizeofstring, "Z");
+		else if (Keyboard == '1')
+			strcat_s(nameofstring, sizeofstring, "1");
+		else if (Keyboard == '2')
+			strcat_s(nameofstring, sizeofstring, "2");
+		else if (Keyboard == '3')
+			strcat_s(nameofstring, sizeofstring, "3");
+		else if (Keyboard == '4')
+			strcat_s(nameofstring, sizeofstring, "4");
+		else if (Keyboard == '5')
+			strcat_s(nameofstring, sizeofstring, "5");
+		else if (Keyboard == '6')
+			strcat_s(nameofstring, sizeofstring, "6");
+		else if (Keyboard == '7')
+			strcat_s(nameofstring, sizeofstring, "7");
+		else if (Keyboard == '8')
+			strcat_s(nameofstring, sizeofstring, "8");
+		else if (Keyboard == '9')
+			strcat_s(nameofstring, sizeofstring, "9");
+		else if (Keyboard == '0')
+			strcat_s(nameofstring, sizeofstring, "0");
+		else if (Keyboard == '`')
+			strcat_s(nameofstring, sizeofstring, "`");
+		else if (Keyboard == '~')
+			strcat_s(nameofstring, sizeofstring, "~");
+		else if (Keyboard == '!')
+			strcat_s(nameofstring, sizeofstring, "!");
+		else if (Keyboard == '@')
+			strcat_s(nameofstring, sizeofstring, "@");
+		else if (Keyboard == '#')
+			strcat_s(nameofstring, sizeofstring, "#");
+		else if (Keyboard == '$')
+			strcat_s(nameofstring, sizeofstring, "$");
+		else if (Keyboard == '%')
+			strcat_s(nameofstring, sizeofstring, "%");
+		else if (Keyboard == '^')
+			strcat_s(nameofstring, sizeofstring, "^");
+		else if (Keyboard == '&')
+			strcat_s(nameofstring, sizeofstring, "&");
+		else if (Keyboard == '*')
+			strcat_s(nameofstring, sizeofstring, "*");
+		else if (Keyboard == '(')
+			strcat_s(nameofstring, sizeofstring, "(");
+		else if (Keyboard == ')')
+			strcat_s(nameofstring, sizeofstring, ")");
+		else if (Keyboard == '_')
+			strcat_s(nameofstring, sizeofstring, "_");
+		else if (Keyboard == '-')
+			strcat_s(nameofstring, sizeofstring, "-");
+		else if (Keyboard == '+')
+			strcat_s(nameofstring, sizeofstring, "+");
+		else if (Keyboard == '[')
+			strcat_s(nameofstring, sizeofstring, "[");
+		else if (Keyboard == ']')
+			strcat_s(nameofstring, sizeofstring, "]");
+		else if (Keyboard == '=')
+			strcat_s(nameofstring, sizeofstring, "=");
+		else if (Keyboard == '{')
+			strcat_s(nameofstring, sizeofstring, "{");
+		else if (Keyboard == '}')
+			strcat_s(nameofstring, sizeofstring, "}");
+		else if (Keyboard == '|')
+			strcat_s(nameofstring, sizeofstring, "|");
+		else if (Keyboard == '\\')
+			strcat_s(nameofstring, sizeofstring, "\\");
+		else if (Keyboard == ':')
+			strcat_s(nameofstring, sizeofstring, ":");
+		else if (Keyboard == ';')
+			strcat_s(nameofstring, sizeofstring, ";");
+		else if (Keyboard == '\'')
+			strcat_s(nameofstring, sizeofstring, "\'");
+		else if (Keyboard == '\"')
+			strcat_s(nameofstring, sizeofstring, "\"");
+		else if (Keyboard == ',')
+			strcat_s(nameofstring, sizeofstring, ",");
+		else if (Keyboard == '<')
+			strcat_s(nameofstring, sizeofstring, "<");
+		else if (Keyboard == '>')
+			strcat_s(nameofstring, sizeofstring, ">");
+		else if (Keyboard == '.')
+			strcat_s(nameofstring, sizeofstring, ".");
+		else if (Keyboard == '/')
+			strcat_s(nameofstring, sizeofstring, "/");
+		else if (Keyboard == '?')
+			strcat_s(nameofstring, sizeofstring, "?");
+       }
+	       
+			Keyboard = 0;
+		Text(x, y, nameofstring, color);
+}
+
+
+
+
+// Coded by Saad Ahmad
