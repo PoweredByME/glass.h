@@ -2,7 +2,7 @@
 
 // Please use this code, modify it, wit each modification write your name with it, learn form it and expand it//
 
-// This code is Created by Ali Danish. Student of NUST H-12 pakistan// 
+// This code is Created by Ali Danish and Saad Ahmad. Student of NUST H-12 pakistan// 
 
 #include <glut.h>
 #include <stdio.h>
