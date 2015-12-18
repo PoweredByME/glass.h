@@ -15,7 +15,7 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.*/
 
 
-// The liberary is powered by M.E.//
+// The liberary is create by De'Burgers (Powered by M.E.)//
 
 // Please use this code, modify it, wit each modification write your name with it, learn form it and expand it//
 
