@@ -1,8 +1,25 @@
+//_____________________________________________Licence_______-----------------------------------------//
+
+/*Copyright (c) 2015, PoweredByME
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.*/
+
+
 // The liberary is powered by M.E.//
 
 // Please use this code, modify it, wit each modification write your name with it, learn form it and expand it//
 
-// This code is Created by Ali Danish and Saad Ahmad. Student of NUST H-12 pakistan// 
+// This code is Created by Ali Danish and Saad Ahmad. Students of NUST H-12 pakistan// 
 
 #include <glut.h>
 #include <stdio.h>
@@ -18,7 +35,7 @@
 #define F1 GLUT_KEY_F1		
 #define F2 GLUT_KEY_F2		
 #define F3 GLUT_KEY_F3		
-#define F4 GLUT_KEY_F4		
+#define F4 GLUT_KEY_F4	
 #define F5 GLUT_KEY_F5		
 #define F6 GLUT_KEY_F6		
 #define F7 GLUT_KEY_F7		
@@ -39,168 +56,9 @@
 #define CONTROL GLUT_ACTIVE_CTRL
 #define ALT GLUT_ACTIVE_ALT
 #define SHIFT GLUT_ACTIVE_SHIFT
-#define ENTER 13;
+#define ENTER 13
 
-
-void ScreenClear() // to clear screen
-{
-	glClear(GL_COLOR_BUFFER_BIT);
-}
-
-
-void SetState(char *state) // for setting the state
-{
-	if (strcmp(state, "Filled") == 0)
-		glBegin(GL_POLYGON);
-	if (strcmp(state, "Hollow") == 0)
-		glBegin(GL_LINE_STRIP);
-}
-
-void SetColor(char *name) // function to set color
-{
-	if (strcmp(name, "Black") == 0)
-	{
-		glColor3f(0.0, 0.0, 0.0);
-	}
-	else if (strcmp(name, "Red") == 0)
-	{
-		glColor3f(1.0, 0.0, 0.0);
-	}
-	else if (strcmp(name, "Blue") == 0)
-	{
-		glColor3f(0.0, 0.0, 1.0);
-	}
-	else if (strcmp(name, "Green") == 0)
-	{
-		glColor3f(0.0, 1.0, 0.0);
-	}
-	else if (strcmp(name, "White") == 0)
-	{
-		glColor3f(1.0, 1.0, 1.0);
-	}
-	else if (strcmp(name, "Yellow") == 0)
-	{
-		glColor3f(1.0, 1.0, 0.0);
-	}
-	else if (strcmp(name, "Purple") == 0)
-	{
-		glColor3f(1.0, 0.0, 1.0);
-	}
-	else if (strcmp(name, "Cyan") == 0)
-	{
-		glColor3f(0.0, 1.0, 1.0);
-	}
-	else if (strcmp(name, "Orange") == 0)
-	{
-		glColor3f(1.0, 0.5, 0.0);
-	}
-	else if (strcmp(name, "DarkRed") == 0)
-	{
-		glColor4f(1.0, 0.0, 0.0, 0.9);
-	}
-	else if (strcmp(name, "GreenishYellow") == 0)
-	{
-		glColor3f(0.5,1.0,0.0);
-	}
-	else if (strcmp(name, "LightGreen") == 0)
-	{
-		glColor3f(0.5, 1.0, 0.5);
-	}
-	else if (strcmp(name, "DarkGreen") == 0)
-	{
-		glColor3f(0.0, 0.5, 0.0);
-	}
-	else if (strcmp(name, "Brown") == 0)
-	{
-		glColor3f(0.5, 0.35, 0.05);
-	}
-	else if (strcmp(name, "Grey") == 0)
-	{
-		glColor4f(0.8, 0.8, 0.8,1.0);
-	}
-	else if (strcmp(name, "DarkGrey") == 0)
-	{
-		glColor4f(0.2, 0.2, 0.2,1.0);
-	}
-	else if (strcmp(name, "Magenta") == 0)
-	{
-		glColor3f(1.0, 0.0, 1.0);
-	}
-}
-
-void CreateRectangle(int x, int y, int height, int lenght, char * name, char * state)
-{
-	SetState(state);
-	SetColor(name);
-	glVertex2f(x, y);
-	glVertex2f(x + lenght, y);
-	glVertex2f(x + lenght, y + height);
-	glVertex2f(x, y + height);
-	glVertex2f(x, y);
-	glEnd();
-
-
-
-}
-
-void CreateTriangle(int __x1, int __y1, int __x2, int __y2, int __x3, int __y3, char * name, char * state)
-{
-	SetState(state);
-	SetColor(name);
-	glVertex2f(__x1, __y1);
-	glVertex2f(__x2, __y2);
-	glVertex2f(__x3, __y3);
-	glVertex2f(__x1, __y1);
-	glEnd();
-}
-
-void DrawLine(float __x1, float __y1, float __x2, float __y2, char * name)
-{
-	glBegin(GL_LINES);
-	SetColor(name);
-	glVertex2f(__x1, __y1);
-	glVertex2f(__x2, __y2);
-	glEnd();
-}
-
-void CreateCircle(int x, int y, int radius, char * name, char *state){
-	float angle;
-	SetState(state);
-	SetColor(name);
-	glLineWidth(1.0f);
-
-	for (int i = 0; i < 100; i++)
-	{
-		angle = i * 2 * M_PI / 100;
-		glVertex2f(x + (cos(angle) * radius), y + (sin(angle) * radius));
-	}
-	glEnd();
-}
-
-
-
-
-
-void Text(int x, int y, char *string, char *name, char *style = "NULL")
-{
-
-	char *c;
-	SetColor(name);
-	glRasterPos2f(x, y);
-	for (c = string; *c != '\0'; c++) {
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
-	}
-
-	if (strcmp(style, "Underline") == 0)
-	{
-		DrawLine(x, y + 8, x + strlen(string) * 9, y + 8, name);
-	}
-	if (strcmp(style, "Bold") == 0)
-	{
-		Text(x + 1, y, string, name);
-	}
-
-}
+//___________________________________________________________________________________________________________//
 int g_Width = 400;		//define size of the window
 int g_Height = 400;
 
@@ -210,10 +68,10 @@ int mouse_y = 0;    //ycod
 int mouse_s = 0;	//mouse state
 int mouse_b = 0;	// mouse buttons
 
-char Keyboard;
-int Key = 0;
-int SpecialKey = 0;
-int ModKey = 0;
+char Keyboard;				  //Keyboard key press detection
+int Key = 0;				  //Key press detection
+int SpecialKey = 0;			  //Special Key press detection 
+int ModKey = 0;				  //ModKey detection
 
 
 int Amotion_x = 0;
@@ -230,15 +88,104 @@ void myReshapeFunction(int width, int height);
 void myTimerFunction(int val);
 void myDisplayFunction();
 
+//_______________________________________________________________________________________________________________//
+
+//_____________________________________________---Support functions---________________________________________?//
+
+void ScreenClear() // to clear screen
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+}
 
 
+void SetState(char *state) // for setting the state
+{
+	if (strcmp(state, "Filled") == 0)
+		glBegin(GL_POLYGON);
+	if (strcmp(state, "Hollow") == 0)
+		glBegin(GL_LINE_STRIP);
+}
+
+void SetColor(char *color) // function to set color
+{
+	if (strcmp(color, "Black") == 0)
+	{
+		glColor3f(0.0, 0.0, 0.0);
+	}
+	else if (strcmp(color, "Red") == 0)
+	{
+		glColor3f(1.0, 0.0, 0.0);
+	}
+	else if (strcmp(color, "Blue") == 0)
+	{
+		glColor3f(0.0, 0.0, 1.0);
+	}
+	else if (strcmp(color, "Green") == 0)
+	{
+		glColor3f(0.0, 1.0, 0.0);
+	}
+	else if (strcmp(color, "White") == 0)
+	{
+		glColor3f(1.0, 1.0, 1.0);
+	}
+	else if (strcmp(color, "Yellow") == 0)
+	{
+		glColor3f(1.0, 1.0, 0.0);
+	}
+	else if (strcmp(color, "Purple") == 0)
+	{
+		glColor3f(1.0, 0.0, 1.0);
+	}
+	else if (strcmp(color, "Cyan") == 0)
+	{
+		glColor3f(0.0, 1.0, 1.0);
+	}
+	else if (strcmp(color, "Orange") == 0)
+	{
+		glColor3f(1.0, 0.5, 0.0);
+	}
+	else if (strcmp(color, "DarkRed") == 0)
+	{
+		glColor4f(1.0, 0.0, 0.0, 0.9);
+	}
+	else if (strcmp(color, "GreenishYellow") == 0)
+	{
+		glColor3f(0.5, 1.0, 0.0);
+	}
+	else if (strcmp(color, "LightGreen") == 0)
+	{
+		glColor3f(0.5, 1.0, 0.5);
+	}
+	else if (strcmp(color, "DarkGreen") == 0)
+	{
+		glColor3f(0.0, 0.5, 0.0);
+	}
+	else if (strcmp(color, "Brown") == 0)
+	{
+		glColor3f(0.5, 0.35, 0.05);
+	}
+	else if (strcmp(color, "Grey") == 0)
+	{
+		glColor4f(0.8, 0.8, 0.8, 1.0);
+	}
+	else if (strcmp(color, "DarkGrey") == 0)
+	{
+		glColor4f(0.2, 0.2, 0.2, 1.0);
+	}
+	else if (strcmp(color, "Magenta") == 0)
+	{
+		glColor3f(1.0, 0.0, 1.0);
+	}
+	else
+		glColor3f(0.0, 0.0, 0.0);
+}
 
 void init(void)
 {
 	//set (0,0) on left top
 }
 
-void mainWindow(int argc, char**argv, int height, int width, char *name)
+void mainWindow(int argc, char**argv, int height, int width, char *color)
 {
 
 	glutInit(&argc, argv);		//initilize the GLUT libraray
@@ -246,73 +193,179 @@ void mainWindow(int argc, char**argv, int height, int width, char *name)
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);		//has four colour components red, green,blue, and alpha 
 	glutInitWindowSize(height, width);	//size of window
 	glutInitWindowPosition(0, 0);		//poistion of window
-	glutCreateWindow("Glut");
+	glutCreateWindow("Glass");
 
-	if (strcmp(name, "Black") == 0)
+	if (strcmp(color, "Black") == 0)
 	{
 		glClearColor(0.0, 0.0, 0.0, 0.0);
 	}
-	else if (strcmp(name, "Red") == 0)
+	else if (strcmp(color, "Red") == 0)
 	{
 		glClearColor(1.0, 0.0, 0.0, 0.0);
 	}
-	else if (strcmp(name, "Blue") == 0)
+	else if (strcmp(color, "Blue") == 0)
 	{
 		glClearColor(0.0, 0.0, 1.0, 0.0);
 	}
-	else if (strcmp(name, "Green") == 0)
+	else if (strcmp(color, "Green") == 0)
 	{
 		glClearColor(0.0, 1.0, 0.0, 0.0);
 	}
-	else if (strcmp(name, "White") == 0)
+	else if (strcmp(color, "White") == 0)
 	{
 		glClearColor(1.0, 1.0, 1.0, 0.0);
 	}
-	else if (strcmp(name, "Yellow") == 0)
+	else if (strcmp(color, "Yellow") == 0)
 	{
 		glClearColor(1.0, 1.0, 0.0, 0.0);
 	}
-	else if (strcmp(name, "Purple") == 0)
+	else if (strcmp(color, "Purple") == 0)
 	{
 		glClearColor(1.0, 0.0, 1.0, 0.0);
 	}
-	else if (strcmp(name, "Cyan") == 0)
+	else if (strcmp(color, "Cyan") == 0)
 	{
 		glClearColor(0.0, 1.0, 1.0, 0.0);
 	}
-	else if (strcmp(name, "Orange") == 0)
+	else if (strcmp(color, "Orange") == 0)
 	{
 		glClearColor(1.0, 0.5, 0.0, 0.0);
 	}
-	else if (strcmp(name, "DarkRed") == 0)
+	else if (strcmp(color, "DarkRed") == 0)
 	{
 		glClearColor(1.0, 0.0, 0.0, 0.9);
 	}
-	else if (strcmp(name, "GreenishYellow") == 0)
+	else if (strcmp(color, "GreenishYellow") == 0)
 	{
 		glClearColor(0.5, 1.0, 0.0,0.0);
 	}
-	else if (strcmp(name, "LightGreen") == 0)
+	else if (strcmp(color, "LightGreen") == 0)
 	{
 		glClearColor(0.5, 1.0, 0.5, 0.0);
 	}
-	else if (strcmp(name, "DarkGreen") == 0)
+	else if (strcmp(color, "DarkGreen") == 0)
 	{
 		glClearColor(0.0, 0.5, 0.0, 0.0);
 	}
-	else if (strcmp(name, "Brown") == 0)
+	else if (strcmp(color, "Brown") == 0)
 	{
 		glClearColor(0.5, 0.35, 0.05, 0.0);
 	}
-	else if (strcmp(name, "Grey") == 0)
+	else if (strcmp(color, "Grey") == 0)
 	{
 		glClearColor(0.8, 0.8, 0.8, 1.0);
 	}
-	else if (strcmp(name, "DarkGrey") == 0)
+	else if (strcmp(color, "DarkGrey") == 0)
 	{
 		glClearColor(0.2, 0.2, 0.2, 1.0);
 	}
-	else if (strcmp(name, "Magenta") == 0)
+	else if (strcmp(color, "Magenta") == 0)
+	{
+		glClearColor(1.0, 0.0, 1.0,0.0);
+	}
+	else
+		glClearColor(0.0, 0.0, 0.0, 0.0);		//background color of openGl window
+	//			 ^red, green, blue, alpha(opens) 
+	glMatrixMode(GL_PROJECTION);		//glMatrixMode — specify which matrix is the current matrix ????
+	glLoadIdentity();		//glLoadIdentity — replace the current matrix with the identity matrix	????
+
+	glOrtho(0.0, g_Width, 0.0, g_Height, -1.0, 1.0);
+
+	glutMouseFunc(MouseButtons);
+	glutMotionFunc(Amotion);
+
+	glutPassiveMotionFunc(Pmotion);
+	glutKeyboardFunc(myKeyboardFunction);
+	glutSpecialFunc(mySpecialKeysFunction);
+
+	glutReshapeFunc(myReshapeFunction);
+	glutDisplayFunc(myDisplayFunction);
+	glutTimerFunc(33, myTimerFunction, 0);
+
+	//	glutFullScreen();	// make the screen fullscreen
+	glutSetCursor(GLUT_CURSOR_INFO);	//Displays the type of cursor u want
+
+
+
+	glutMainLoop();
+
+}
+
+void mainWindow(int argc, char**argv, char *windowName, int height, int width, char *color)
+{
+
+	glutInit(&argc, argv);		//initilize the GLUT libraray
+
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);		//has four colour components red, green,blue, and alpha 
+	glutInitWindowSize(height, width);	//size of window
+	glutInitWindowPosition(0, 0);		//poistion of window
+	glutCreateWindow(windowName);
+
+	if (strcmp(color, "Black") == 0)
+	{
+		glClearColor(0.0, 0.0, 0.0, 0.0);
+	}
+	else if (strcmp(color, "Red") == 0)
+	{
+		glClearColor(1.0, 0.0, 0.0, 0.0);
+	}
+	else if (strcmp(color, "Blue") == 0)
+	{
+		glClearColor(0.0, 0.0, 1.0, 0.0);
+	}
+	else if (strcmp(color, "Green") == 0)
+	{
+		glClearColor(0.0, 1.0, 0.0, 0.0);
+	}
+	else if (strcmp(color, "White") == 0)
+	{
+		glClearColor(1.0, 1.0, 1.0, 0.0);
+	}
+	else if (strcmp(color, "Yellow") == 0)
+	{
+		glClearColor(1.0, 1.0, 0.0, 0.0);
+	}
+	else if (strcmp(color, "Purple") == 0)
+	{
+		glClearColor(1.0, 0.0, 1.0, 0.0);
+	}
+	else if (strcmp(color, "Cyan") == 0)
+	{
+		glClearColor(0.0, 1.0, 1.0, 0.0);
+	}
+	else if (strcmp(color, "Orange") == 0)
+	{
+		glClearColor(1.0, 0.5, 0.0, 0.0);
+	}
+	else if (strcmp(color, "DarkRed") == 0)
+	{
+		glClearColor(1.0, 0.0, 0.0, 0.9);
+	}
+	else if (strcmp(color, "GreenishYellow") == 0)
+	{
+		glClearColor(0.5, 1.0, 0.0,0.0);
+	}
+	else if (strcmp(color, "LightGreen") == 0)
+	{
+		glClearColor(0.5, 1.0, 0.5, 0.0);
+	}
+	else if (strcmp(color, "DarkGreen") == 0)
+	{
+		glClearColor(0.0, 0.5, 0.0, 0.0);
+	}
+	else if (strcmp(color, "Brown") == 0)
+	{
+		glClearColor(0.5, 0.35, 0.05, 0.0);
+	}
+	else if (strcmp(color, "Grey") == 0)
+	{
+		glClearColor(0.8, 0.8, 0.8, 1.0);
+	}
+	else if (strcmp(color, "DarkGrey") == 0)
+	{
+		glClearColor(0.2, 0.2, 0.2, 1.0);
+	}
+	else if (strcmp(color, "Magenta") == 0)
 	{
 		glClearColor(1.0, 0.0, 1.0,0.0);
 	}
@@ -401,91 +454,122 @@ void myTimerFunction(int val)
 int i = 0;
 
 
+void RefreshScreen()
+{
+	glutSwapBuffers();
+}
 void refreshScreen()
 {
 	glutSwapBuffers();
 }
 
-// This code is written by Ali Danish. A Student of NUST H-12 pakistan
+//____________________________________---Support Functions---________________________________________//
 
-// this code is written by Saad Ahmad 
 
-void Text(int x, int y, int text, char *name, char *style = "NULL")
+//_______________________________-line -_____________________________________________________________________//
+
+void DrawLine(double __x1, double __y1, double __x2, double __y2, char * color)
 {
-	char e[20];
-	_itoa_s(text, e, 10);
-	Text(x, y, e, name, style);
-}
-
-void Text(double x, double y, int text, char *name, char *style = "NULL")
-{
-	char e[20];
-	_itoa_s(text, e, 10);
-	Text(x, y, e, name, style);
-}
-
-
-
-void Text(int x, int y, long text, char *name, char *style = "NULL")
-{
-	char e[20];
-	_itoa_s(text, e, 10);
-	Text(x, y, e, name, style);
-}
-
-void Text(float x, float y, long text, char *name, char *style = "NULL")
-{
-	char e[20];
-	_itoa_s(text, e, 10);
-	Text(x, y, e, name, style);
-}
-
-void CreateCircle(double x, double y, double radius, char * name, char *state){
-	float angle;
-	SetState(state);
-	SetColor(name);
-	glLineWidth(1.0f);
-
-	for (int i = 0; i < 100; i++)
-	{
-		angle = i * 2 * M_PI / 100;
-		glVertex2f(x + (cos(angle) * radius), y + (sin(angle) * radius));
-	}
+	glBegin(GL_LINES);
+	SetColor(color);
+	glVertex2f(__x1, __y1);
+	glVertex2f(__x2, __y2);
 	glEnd();
 }
 
-void CreateCircle(int x, int y, double radius, char * name, char *state){
-	float angle;
-	SetState(state);
-	SetColor(name);
-	glLineWidth(1.0f);
-
-	for (int i = 0; i < 100; i++)
-	{
-		angle = i * 2 * M_PI / 100;
-		glVertex2f(x + (cos(angle) * radius), y + (sin(angle) * radius));
-	}
+void DrawLine(int __x1, int __y1, int __x2, int __y2, char * color)
+{
+	glBegin(GL_LINES);
+	SetColor(color);
+	glVertex2f(__x1, __y1);
+	glVertex2f(__x2, __y2);
 	glEnd();
 }
 
-void CreateCircle(double x, double y, int radius, char * name, char *state){
-	float angle;
-	SetState(state);
-	SetColor(name);
-	glLineWidth(1.0f);
+//_______________________________line_____________________________________________________________________----//
 
-	for (int i = 0; i < 100; i++)
-	{
-		angle = i * 2 * M_PI / 100;
-		glVertex2f(x + (cos(angle) * radius), y + (sin(angle) * radius));
+
+//_________________________________________Text_______________________________________________________--//
+
+void Text(int x, int y, char *string, char *color, char *style = "NULL")
+{
+
+	char *c;
+	SetColor(color);
+	glRasterPos2f(x, y);
+	for (c = string; *c != '\0'; c++) {
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
 	}
-	glEnd();
+
+	if (strcmp(style, "Underline") == 0)
+	{
+		DrawLine(x, y + 8, x + strlen(string) * 9, y + 8, color);
+	}
+	if (strcmp(style, "Bold") == 0)
+	{
+		Text(x + 1, y, string, color);
+	}
+
 }
 
-void CreateTriangle(double __x1, double __y1, double __x2, double __y2, double __x3, double __y3, char * name, char * state)
+void Text(double x, double y, char *string, char *color, char *style = "NULL")
+{
+
+	char *c;
+	SetColor(color);
+	glRasterPos2f(x, y);
+	for (c = string; *c != '\0'; c++) {
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
+	}
+
+	if (strcmp(style, "Underline") == 0)
+	{
+		DrawLine(x, y + 8, x + strlen(string) * 9, y + 8, color);
+	}
+	if (strcmp(style, "Bold") == 0)
+	{
+		Text(x + 1, y, string, color);
+	}
+
+}
+
+void Text(int x, int y, int text, char *color, char *style = "NULL")
+{
+	char e[20];
+	_itoa_s(text, e, 10);
+	Text(x, y, e, color, style);
+}
+
+void Text(double x, double y, int text, char *color, char *style = "NULL")
+{
+	char e[20];
+	_itoa_s(text, e, 10);
+	Text(x, y, e, color, style);
+}
+
+void Text(int x, int y, long text, char *color, char *style = "NULL")
+{
+	char e[20];
+	_itoa_s(text, e, 10);
+	Text(x, y, e, color, style);
+}
+
+void Text(float x, float y, long text, char *color, char *style = "NULL")
+{
+	char e[20];
+	_itoa_s(text, e, 10);
+	Text(x, y, e, color, style);
+}
+
+//__________________________________________________________Text________________________________________________//
+
+
+//________________________Triangle______________________________________________________________________?//
+
+void CreateTriangle(double __x1, double __y1, double __x2, double __y2, double __x3, double __y3, char * color, char * state)
 {
 	SetState(state);
-	SetColor(name);
+	SetColor(color);
 	glVertex2f(__x1, __y1);
 	glVertex2f(__x2, __y2);
 	glVertex2f(__x3, __y3);
@@ -493,10 +577,25 @@ void CreateTriangle(double __x1, double __y1, double __x2, double __y2, double _
 	glEnd();
 }
 
-void CreateRectangle(double x, double y, double height, double lenght, char * name, char * state)
+void CreateTriangle(int __x1, int __y1, int __x2, int __y2, int __x3, int __y3, char * color, char * state)
 {
-    SetState(state);
-	SetColor(name);
+	SetState(state);
+	SetColor(color);
+	glVertex2f(__x1, __y1);
+	glVertex2f(__x2, __y2);
+	glVertex2f(__x3, __y3);
+	glVertex2f(__x1, __y1);
+	glEnd();
+}
+
+//_____________________________Triangle__________________________________________________________________//
+
+//__________________________________________RECTANGLE_____________________________________________________--//
+
+void CreateRectangle(int x, int y, int height, int lenght, char * color, char * state)
+{
+	SetState(state);
+	SetColor(color);
 	glVertex2f(x, y);
 	glVertex2f(x + lenght, y);
 	glVertex2f(x + lenght, y + height);
@@ -505,18 +604,207 @@ void CreateRectangle(double x, double y, double height, double lenght, char * na
 	glEnd();
 }
 
+void CreateRectangle(double x, double y, double height, double lenght, char * color, char * state)
+{
+	SetState(state);
+	SetColor(color);
+	glVertex2f(x, y);
+	glVertex2f(x + lenght, y);
+	glVertex2f(x + lenght, y + height);
+	glVertex2f(x, y + height);
+	glVertex2f(x, y);
+	glEnd();
+}
+
+void CreateRectangle(double x, double y, double height, double lenght, char * color, char * state, int LineThickness_inEvenNumber)
+{
+	float t = LineThickness_inEvenNumber;
+	for (int c = t; c >= 0; c--)
+	{
+		float a = t / 2 + 2;
+		SetState(state);
+		SetColor(color);
+		glVertex2f(x - a, y - a);
+		glVertex2f(x - a + lenght + t, y - a);
+		glVertex2f(x - a + lenght + t, y - a + height + t);
+		glVertex2f(x - a, y - a + height + t);
+		glVertex2f(x - a, y - a);
+		t--;
+		glEnd();
+	}
+}
+
+void CreateRectangle(int x, int y, int height, int lenght, char * color, char * state, int LineThickness_inEvenNumber)
+{
+	float t = LineThickness_inEvenNumber;
+	for (int c = t; c >= 0; c--)
+	{
+		float a = t / 2 + 2;
+		SetState(state);
+		SetColor(color);
+		glVertex2f(x - a, y - a);
+		glVertex2f(x - a + lenght + t, y - a);
+		glVertex2f(x - a + lenght + t, y - a + height + t);
+		glVertex2f(x - a, y - a + height + t);
+		glVertex2f(x - a, y - a);
+		t--;
+		glEnd();
+	}
+}
+//____________________________________________________________________________________RECTANGLE______?//
+
+//________________________________________--ellipse__________________________________________________?//
+
+void CreateEllipse(double origin_x, double origin_y, double max_height, double max_width, char*color, char*state)
+{
+	double angle = 0;
+	SetState(state);
+	SetColor(color);
+	glLineWidth(1.0f);
+	for (int i = 0; i < 360; i++)
+	{
+		angle = i * 2 * M_PI / 180;
+		glVertex2f(origin_x + (cos(angle) * max_width), origin_y + (sin(angle) * max_height));
+	}
+	glEnd();
+}
+
+void CreateEllipse(int origin_x, int origin_y, int max_height, int max_width, char*color, char*state)
+{
+	double angle = 0;
+	SetState(state);
+	SetColor(color);
+	glLineWidth(1.0f);
+	for (int i = 0; i < 360; i++)
+	{
+		angle = i * 2 * M_PI / 180;
+		glVertex2f(origin_x + (cos(angle) * max_width), origin_y + (sin(angle) * max_height));
+	}
+	glEnd();
+}
+
+void  CreateEllipse(double origin_x, double origin_y, double max_height, double max_width, char*color, char*state,int LineThickness)
+{
+	for (int c = 0; c <= LineThickness; c++)
+	{
+		CreateEllipse(origin_x, origin_y, max_height, max_width, color, state);
+		max_height-=0.5;
+		max_width-=0.5;
+	}
+}
+
+//___________________________________________--ELLIPSE--_________________________________________________?//
+
+//___________________________________________________________-circle-__________________________________//
+void CreateCircle(int x, int y, int radius, char * color, char *state){
+	float angle;
+	SetState(state);
+	SetColor(color);
+	glLineWidth(1.0f);
+
+	for (int i = 0; i < 120; i++)
+	{
+		angle = i * 2 * M_PI / 100;
+		glVertex2f(x + (cos(angle + 5) * radius), y + (sin(angle + 5) * radius));
+	}
+	glEnd();
+}
+
+void CreateCircle(int x, int y, int radius, char* color, char*state, int LineThickness)
+{
+	double r = radius;
+	for (float c = 0; c <= 1 * LineThickness; c += 1)
+	{
+		CreateCircle(x, y, r, color, state);
+		r -= 0.5;
+	}
+}
+void CreateCircle(int x, int y, double radius, char* color, char*state, int LineThickness)
+{
+	double r = radius;
+	for (float c = 0; c <= 1 * LineThickness; c += 1)
+	{
+		CreateCircle(x, y, r, color, state);
+		r -= 0.5;
+	}
+}
+void CreateCircle(double x, double y, int radius, char* color, char*state, int LineThickness)
+{
+	double r = radius;
+	for (float c = 0; c <= 1 * LineThickness; c += 1)
+	{
+		CreateCircle(x, y, radius, color, state);
+		r -= 0.5;
+	}
+}
+
+void CreateCircle(double x, double y, double radius, char* color, char*state, int LineThickness)
+{
+	double r = radius;
+	for (float c = 0; c <= 1 * LineThickness; c += 1)
+	{
+		CreateCircle(x, y, r, color, state);
+		r -= 0.5;
+	}
+}
+void CreateCircle(double x, double y, double radius, char * color, char *state){
+	float angle;
+	SetState(state);
+	SetColor(color);
+	glLineWidth(1.0f);
+
+	for (int i = 0; i < 120; i++)
+	{
+		angle = i * 2 * M_PI / 100;
+		glVertex2f(x + (cos(angle + 5) * radius), y + (sin(angle + 5) * radius));
+	}
+	glEnd();
+}
+
+void CreateCircle(int x, int y, double radius, char * color, char *state){
+	float angle;
+	SetState(state);
+	SetColor(color);
+	glLineWidth(1.0f);
+
+	for (int i = 0; i < 120; i++)
+	{
+		angle = i * 2 * M_PI / 100;
+		glVertex2f(x + (cos(angle + 5) * radius), y + (sin(angle + 5) * radius));
+	}
+	glEnd();
+}
+
+void CreateCircle(double x, double y, int radius, char * color, char *state){
+	float angle;
+	SetState(state);
+	SetColor(color);
+	glLineWidth(1.0f);
+
+	for (int i = 0; i < 120; i++)
+	{
+		angle = i * 2 * M_PI / 100;
+		glVertex2f(x + (cos(angle + 5) * radius), y + (sin(angle + 5) * radius));
+	}
+	glEnd();
+}
+
+/////__________________________------circle------____________________________________________//
+
+//_____________________----functionality for keyboard___________________________________________________//
+
 void InputText(double x, double y, char* nameofstring, int sizeofstring, char* color)
 {
-	int a=strlen(nameofstring);
-	char* stringText = (char*)calloc(sizeofstring+1, 4);
+	int a = strlen(nameofstring);
+	char* stringText = (char*)calloc(sizeofstring + 1, 4);
 	stringText = nameofstring;
-		if (Keyboard == '\b')
-		{
-			strncpy_s(nameofstring, sizeofstring, stringText, (strlen(stringText) - 1));
-		}
+	if (Keyboard == '\b')
+	{
+		strncpy_s(nameofstring, sizeofstring, stringText, (strlen(stringText) - 1));
+	}
 
-		if (a != sizeofstring-1)
-		{
+	if (a != sizeofstring - 1)
+	{
 		if (Keyboard == 'a')
 			strcat_s(nameofstring, sizeofstring, "a");
 		else if (Keyboard == 'b')
@@ -707,13 +995,11 @@ void InputText(double x, double y, char* nameofstring, int sizeofstring, char* c
 			strcat_s(nameofstring, sizeofstring, "/");
 		else if (Keyboard == '?')
 			strcat_s(nameofstring, sizeofstring, "?");
-       }
-	       
-			Keyboard = 0;
-		Text(x, y, nameofstring, color);
+	}
+
+	Keyboard = 0;
+	Text(x, y, nameofstring, color);
 }
+//___________________________----function for keyboard---__________________________________________________??//
 
 
-
-
-// Coded by Saad Ahmad
