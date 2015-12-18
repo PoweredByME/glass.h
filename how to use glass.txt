@@ -1,5 +1,5 @@
 
-glass.h
+                                   <<<<<<<<<<<<<<<<<<<<<<<<<<<<glass.h>>>>>>>>>>>>>>>>>>>>>>>>>>
 Try every code like presented in the following example… you will grasp the basics of graphics and animation…
 It is a derived from glut so it contains the powers of glut…. You may use the codes and functions of glut too.
 How to start the coding is the first activation barrier in the field of programming…. 
@@ -302,6 +302,144 @@ void myDisplayFunction()
 give the coordinate of the pointer of the mouse. Try left
 clicking on the figure you have created and while clicking move the pointer.
 
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<UPDATED FUNCTIONS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 
- 
+The new functios include:-
+
+1>> mainWindow(argc,argv,int height, int width, char* nameofwindow, char* backgroundColor)
+
+Use this code.
+#include<glass.h>
+void main(int argc, char** argv)
+{
+    mainWindow(argc, argv,"NewWindowsName", 400, 500, "Red");
+}
+
+void myDisplayFunction()
+{
+ScreenClear(); 
+
+
+RefreshScreen();
+} 
+
+- Try writing your name replacing NewWindowsName with your name (in a string) ad look at the upper
+of the window. You will see your name.
+
+
+
+<<2>> You can type on the windows screen in glass to. 
+
+Use this function 
+
+InputText(int x,int y, char* nameofstring, int sizeofstring, char* color)
+
+Try using this code:
+#include<glass.h>
+
+char theString[20] = "";     //Defining the string(global) which can take the input from keyboard. 
+
+void main(int argc, char** argv)
+{
+    mainWindow(argc, argv,"NewWindowsName", 400, 500, "Red");
+}
+
+void myDisplayFunction()
+{
+ScreenClear(); 
+
+InputText(10,50,theString,20,"Blue");
+
+RefreshScreen();
+}
+
+Experiment:-
+> Try changing the size of the string and input it in the sizeofstring argument. 	
+> Try changing the orientation of the text box by changing the x and y coordinates.
+> Try changing the name of the string(the character array).
+
+
+>>>>>>>>>>>YOU MAY ALSO CHANGE THE THICKNESS OF HOLLOW OBJECTS<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Try using this code:
+
+#include<glass.h>
+
+void main(int argc, char**argv)
+{
+	mainWindow(argc, argv,300, 300, "Red");
+}
+void myDisplayFunction()
+{
+	ScreenClear();
+	CreateCircle(150.778, 100.34, 70.3, "Grey", "Hollow",10);
+	CreateRectangle(100, 100, 40, 50, "Blue", "Hollow");
+	CreateRectangle(200, 200, 40, 40, "Black", "Hollow",20);
+	RefreshScreen();
+}
+
+The new functions are:
+->CreateCircle(int x, int y,int radius, char* color,char*state,int LineThickness)
+->CreateRectangle(int x,int y,int height, int widht, char*color, char*state, int LineThickness)
+
+<<<<<YOU CANNOT DO THIS WITH TRIANGLES AND LINES (for now) >>>>>>>>>>>>>
+
+>>>>>>> You can create ellipses.....
+
+CreateEllipse(int origin_x,int origin_y,int max_height, int max_width, char* color, char*state)
+
+Try using this code.
+
+#include<glass.h>
+
+void main(int argc, char**argv)
+{
+	mainWindow(argc, argv,300, 300, "Red");
+}
+void myDisplayFunction()
+{
+	ScreenClear();
+	
+	CreateEllipse(150, 150, 40, 80, "Yellow", "Filled");
+	
+	RefreshScreen();
+}
+
+or you may use:
+
+#include<glass.h>
+
+void main(int argc, char**argv)
+{
+	mainWindow(argc, argv,300, 300, "Red");
+}
+void myDisplayFunction()
+{
+	ScreenClear();
+	
+	CreateEllipse(150, 150, 40, 80, "Yellow", "Hollow");
+	
+	RefreshScreen();
+}
+
+You may also use this.... to widen the boundary of the ellipse.
+?????CreateEllipse(int origin_x,int origin_y,int max_height, int max_width, char* color, char*state,int LineThickness)
+
+
+
+#include<glass.h>
+
+void main(int argc, char**argv)
+{
+	mainWindow(argc, argv,300, 300, "Red");
+}
+void myDisplayFunction()
+{
+	ScreenClear();
+	
+	CreateEllipse(150, 150, 40, 80, "Yellow", "Hollow",10);
+	
+	RefreshScreen();
+}
+
 
