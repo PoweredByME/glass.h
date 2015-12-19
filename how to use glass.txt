@@ -18,6 +18,10 @@ ScreenClear();
 refreshScreen();
 }
 
+(((NOTE: WHEN YOU WILL RUN THIS CODE AN ERROR MIGHT OCCUR  --Severity Code Description Project File Line
+Error C2381 'exit': redefinition; __declspec(noreturn) differs ConsoleApplication14 c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdlib.h 50-- To rectify that click on the error (in visul studio 2013 or 2015). Stdlib.h will open and a line will be selected in its code. Comment it out by (//) two forward slashes, the save the update stdlib.h on desktop. The open the include folder where you have pasted glass.h. Then delete stdlib.h there and cut paste the updated stdlib in that include folder.))))))))) 
+
+
 
 
 Well what is (int argc and char** argv). For now just consider it to be a requirement of syntax. 
