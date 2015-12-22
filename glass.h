@@ -15,7 +15,7 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.*/
 
 
-// The liberary is create by De'Burgers (Powered by M.E.)//
+// The liberary is powered by M.E.//
 
 // Please use this code, modify it, wit each modification write your name with it, learn form it and expand it//
 
@@ -35,7 +35,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.*/
 #define F1 GLUT_KEY_F1		
 #define F2 GLUT_KEY_F2		
 #define F3 GLUT_KEY_F3		
-#define F4 GLUT_KEY_F4	
+#define F4 GLUT_KEY_F4		
 #define F5 GLUT_KEY_F5		
 #define F6 GLUT_KEY_F6		
 #define F7 GLUT_KEY_F7		
@@ -185,7 +185,8 @@ void init(void)
 	//set (0,0) on left top
 }
 
-void mainWindow(int argc, char**argv, int height, int width, char *color)
+
+void mainWindow(int argc, char**argv, int height, int width, char *color, int RefreshRate)
 {
 
 	glutInit(&argc, argv);		//initilize the GLUT libraray
@@ -280,7 +281,7 @@ void mainWindow(int argc, char**argv, int height, int width, char *color)
 
 	glutReshapeFunc(myReshapeFunction);
 	glutDisplayFunc(myDisplayFunction);
-	glutTimerFunc(33, myTimerFunction, 0);
+	glutTimerFunc(RefreshRate, myTimerFunction, 0);
 
 	//	glutFullScreen();	// make the screen fullscreen
 	glutSetCursor(GLUT_CURSOR_INFO);	//Displays the type of cursor u want
@@ -291,7 +292,7 @@ void mainWindow(int argc, char**argv, int height, int width, char *color)
 
 }
 
-void mainWindow(int argc, char**argv, char *windowName, int height, int width, char *color)
+void mainWindow(int argc, char**argv, char *windowName, int height, int width, char *color, int RefreshRate)
 {
 
 	glutInit(&argc, argv);		//initilize the GLUT libraray
@@ -386,7 +387,7 @@ void mainWindow(int argc, char**argv, char *windowName, int height, int width, c
 
 	glutReshapeFunc(myReshapeFunction);
 	glutDisplayFunc(myDisplayFunction);
-	glutTimerFunc(33, myTimerFunction, 0);
+	glutTimerFunc(RefreshRate, myTimerFunction, 0);
 
 	//	glutFullScreen();	// make the screen fullscreen
 	glutSetCursor(GLUT_CURSOR_INFO);	//Displays the type of cursor u want
@@ -396,6 +397,17 @@ void mainWindow(int argc, char**argv, char *windowName, int height, int width, c
 	glutMainLoop();
 
 }
+
+void mainWindow(int argc, char**argv, int height, int width, char *color)
+{
+	mainWindow(argc, argv, height, width, color, 33);
+}
+
+void mainWindow(int argc, char**argv, char *windowName, int height, int width, char *color)
+{
+	mainWindow(argc, argv, windowName, height, width, color, 33);
+}
+
 void MouseButtons(int button, int state, int mouseX, int mouseY)
 {
 	mouse_x = mouseX;
@@ -1002,4 +1014,146 @@ void InputText(double x, double y, char* nameofstring, int sizeofstring, char* c
 }
 //___________________________----function for keyboard---__________________________________________________??//
 
+//______________________________shape_________________________________________________________________//
 
+void StartShape(char*color, char*state)
+{
+	SetState(state);
+	SetColor(color);
+
+}
+
+void ShapeLine(double x1, double y1, double x2, double y2)
+{
+	glVertex2f(x1, y1);
+	glVertex2f(x2, y2);
+}
+
+void ShapeCircle(double origin_x, double origin_y, double radius)
+{
+	double angle;
+	double x = origin_x;
+	double y = origin_y;
+	glLineWidth(1.0f);
+
+	for (int i = 0; i < 120; i++)
+	{
+		angle = i * 2 * M_PI / 100;
+		glVertex2f(x + (cos(angle + 5) * radius), y + (sin(angle + 5) * radius));
+	}
+}
+void ShapeCircle(int origin_x, int origin_y, int radius)
+{
+	double angle;
+	double x = origin_x;
+	double y = origin_y;
+	glLineWidth(1.0f);
+
+	for (int i = 0; i < 120; i++)
+	{
+		angle = i * 2 * M_PI / 100;
+		glVertex2f(x + (cos(angle + 5) * radius), y + (sin(angle + 5) * radius));
+	}
+}
+
+void ShapeEllipse(int origin_x, int origin_y, int max_height, int max_width)
+{
+	double angle = 0;
+	glLineWidth(1.0f);
+	for (int i = 0; i < 360; i++)
+	{
+		angle = i * 2 * M_PI / 180;
+		glVertex2f(origin_x + (cos(angle) * max_width), origin_y + (sin(angle) * max_height));
+	}
+}
+
+void ShapeEllipse(double origin_x, double origin_y, double max_height, double max_width)
+{
+	double angle = 0;
+	glLineWidth(1.0f);
+	for (int i = 0; i < 360; i++)
+	{
+		angle = i * 2 * M_PI / 180;
+		glVertex2f(origin_x + (cos(angle) * max_width), origin_y + (sin(angle) * max_height));
+	}
+}
+
+void ShapeRectangle(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4)
+{
+	ShapeLine(x1, y1, x2, y2);
+	ShapeLine(x2, y2, x3, y3);
+	ShapeLine(x3, y3, x4, y4);
+	ShapeLine(x4, y4, x1, y1);
+}
+
+void ShapeRectangle(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
+{
+	ShapeLine(x1, y1, x2, y2);
+	ShapeLine(x2, y2, x3, y3);
+	ShapeLine(x3, y3, x4, y4);
+	ShapeLine(x4, y4, x1, y1);
+}
+
+void ShapeRectangle(double x, double y, double height, double lenght)
+{
+	glVertex2f(x, y);
+	glVertex2f(x + lenght, y);
+	glVertex2f(x + lenght, y + height);
+	glVertex2f(x, y + height);
+	glVertex2f(x, y);
+}
+
+void ShapeRectangle(int x, int y, int height, int lenght)
+{
+	glVertex2f(x, y);
+	glVertex2f(x + lenght, y);
+	glVertex2f(x + lenght, y + height);
+	glVertex2f(x, y + height);
+	glVertex2f(x, y);
+}
+
+void ShapeTriangle(int __x1, int __y1, int __x2, int __y2, int __x3, int __y3)
+{
+	glVertex2f(__x1, __y1);
+	glVertex2f(__x2, __y2);
+	glVertex2f(__x3, __y3);
+	glVertex2f(__x1, __y1);
+}
+
+void ShapeTriangle(double __x1, double __y1, double __x2, double __y2, double __x3, double __y3)
+{
+	glVertex2f(__x1, __y1);
+	glVertex2f(__x2, __y2);
+	glVertex2f(__x3, __y3);
+	glVertex2f(__x1, __y1);
+}
+
+void EndShape()
+{
+	glEnd();
+}
+
+//______________________________shape_________________________________________________________________//
+
+
+//_________________________________-rectangle-____________________________________________________________-//
+void CreateRectangle(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, char* color, char* state)
+{
+	StartShape(state, color);
+	ShapeLine(x1, y1, x2, y2);
+	ShapeLine(x2, y2, x3, y3);
+	ShapeLine(x3, y3, x4, y4);
+	ShapeLine(x4, y4, x1, y1);
+	EndShape();
+}
+
+void CreateRectangle(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4, char* color, char* state)
+{
+	StartShape(state, color);
+	ShapeLine(x1, y1, x2, y2);
+	ShapeLine(x2, y2, x3, y3);
+	ShapeLine(x3, y3, x4, y4);
+	ShapeLine(x4, y4, x1, y1);
+	EndShape();
+}
+//_________________________________-rectangle-____________________________________________________________-//
