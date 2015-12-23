@@ -17,8 +17,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.*/
 
 // The liberary is powered by M.E.//
 
-// Please use this code, modify it, wit each modification write your name with it, learn form it and expand it//
-
 // This code is Created by Ali Danish and Saad Ahmad. Students of NUST H-12 pakistan// 
 
 #include <glut.h>
@@ -134,7 +132,7 @@ void SetColor(char *color) // function to set color
 	}
 	else if (strcmp(color, "Purple") == 0)
 	{
-		glColor3f(1.0, 0.0, 1.0);
+		glColor4f(1.0, 0.0, 1.0,1.0);
 	}
 	else if (strcmp(color, "Cyan") == 0)
 	{
@@ -186,120 +184,37 @@ void init(void)
 }
 
 
-void mainWindow(int argc, char**argv, int height, int width, char *color, int RefreshRate)
+void SetCursor(char* CursorType)
 {
-
-	glutInit(&argc, argv);		//initilize the GLUT libraray
-
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);		//has four colour components red, green,blue, and alpha 
-	glutInitWindowSize(height, width);	//size of window
-	glutInitWindowPosition(0, 0);		//poistion of window
-	glutCreateWindow("Glass");
-
-	if (strcmp(color, "Black") == 0)
+	if (strcmp(CursorType, "RightArrow")==0)
 	{
-		glClearColor(0.0, 0.0, 0.0, 0.0);
+		glutSetCursor(GLUT_CURSOR_RIGHT_ARROW);
 	}
-	else if (strcmp(color, "Red") == 0)
+	else if (strcmp(CursorType, "LeftArrow")==0)
 	{
-		glClearColor(1.0, 0.0, 0.0, 0.0);
+		glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
 	}
-	else if (strcmp(color, "Blue") == 0)
+	else if (strcmp(CursorType, "InformationArrow")==0)
 	{
-		glClearColor(0.0, 0.0, 1.0, 0.0);
+		glutSetCursor(GLUT_CURSOR_INFO);
 	}
-	else if (strcmp(color, "Green") == 0)
+	else if (strcmp(CursorType, "QuestionMarkArrow")==0)
 	{
-		glClearColor(0.0, 1.0, 0.0, 0.0);
-	}
-	else if (strcmp(color, "White") == 0)
-	{
-		glClearColor(1.0, 1.0, 1.0, 0.0);
-	}
-	else if (strcmp(color, "Yellow") == 0)
-	{
-		glClearColor(1.0, 1.0, 0.0, 0.0);
-	}
-	else if (strcmp(color, "Purple") == 0)
-	{
-		glClearColor(1.0, 0.0, 1.0, 0.0);
-	}
-	else if (strcmp(color, "Cyan") == 0)
-	{
-		glClearColor(0.0, 1.0, 1.0, 0.0);
-	}
-	else if (strcmp(color, "Orange") == 0)
-	{
-		glClearColor(1.0, 0.5, 0.0, 0.0);
-	}
-	else if (strcmp(color, "DarkRed") == 0)
-	{
-		glClearColor(1.0, 0.0, 0.0, 0.9);
-	}
-	else if (strcmp(color, "GreenishYellow") == 0)
-	{
-		glClearColor(0.5, 1.0, 0.0,0.0);
-	}
-	else if (strcmp(color, "LightGreen") == 0)
-	{
-		glClearColor(0.5, 1.0, 0.5, 0.0);
-	}
-	else if (strcmp(color, "DarkGreen") == 0)
-	{
-		glClearColor(0.0, 0.5, 0.0, 0.0);
-	}
-	else if (strcmp(color, "Brown") == 0)
-	{
-		glClearColor(0.5, 0.35, 0.05, 0.0);
-	}
-	else if (strcmp(color, "Grey") == 0)
-	{
-		glClearColor(0.8, 0.8, 0.8, 1.0);
-	}
-	else if (strcmp(color, "DarkGrey") == 0)
-	{
-		glClearColor(0.2, 0.2, 0.2, 1.0);
-	}
-	else if (strcmp(color, "Magenta") == 0)
-	{
-		glClearColor(1.0, 0.0, 1.0,0.0);
+		glutSetCursor(GLUT_CURSOR_HELP);
 	}
 	else
-		glClearColor(0.0, 0.0, 0.0, 0.0);		//background color of openGl window
-	//			 ^red, green, blue, alpha(opens) 
-	glMatrixMode(GL_PROJECTION);		//glMatrixMode — specify which matrix is the current matrix ????
-	glLoadIdentity();		//glLoadIdentity — replace the current matrix with the identity matrix	????
-
-	glOrtho(0.0, g_Width, 0.0, g_Height, -1.0, 1.0);
-
-	glutMouseFunc(MouseButtons);
-	glutMotionFunc(Amotion);
-
-	glutPassiveMotionFunc(Pmotion);
-	glutKeyboardFunc(myKeyboardFunction);
-	glutSpecialFunc(mySpecialKeysFunction);
-
-	glutReshapeFunc(myReshapeFunction);
-	glutDisplayFunc(myDisplayFunction);
-	glutTimerFunc(RefreshRate, myTimerFunction, 0);
-
-	//	glutFullScreen();	// make the screen fullscreen
-	glutSetCursor(GLUT_CURSOR_INFO);	//Displays the type of cursor u want
-
-
-
-	glutMainLoop();
-
+		glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
 }
 
-void mainWindow(int argc, char**argv, char *windowName, int height, int width, char *color, int RefreshRate)
+
+void mainWindow(int argc, char**argv, char *windowName, int height, int width, char *color,int WindowPosition_x,int WindowPosition_y, int RefreshRate,char*CursorType)
 {
 
 	glutInit(&argc, argv);		//initilize the GLUT libraray
 
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);		//has four colour components red, green,blue, and alpha 
 	glutInitWindowSize(height, width);	//size of window
-	glutInitWindowPosition(0, 0);		//poistion of window
+	glutInitWindowPosition(WindowPosition_x,WindowPosition_y);		//poistion of window
 	glutCreateWindow(windowName);
 
 	if (strcmp(color, "Black") == 0)
@@ -390,7 +305,7 @@ void mainWindow(int argc, char**argv, char *windowName, int height, int width, c
 	glutTimerFunc(RefreshRate, myTimerFunction, 0);
 
 	//	glutFullScreen();	// make the screen fullscreen
-	glutSetCursor(GLUT_CURSOR_INFO);	//Displays the type of cursor u want
+	SetCursor(CursorType);	//Displays the type of cursor u want
 
 
 
@@ -398,15 +313,64 @@ void mainWindow(int argc, char**argv, char *windowName, int height, int width, c
 
 }
 
+
+
 void mainWindow(int argc, char**argv, int height, int width, char *color)
 {
-	mainWindow(argc, argv, height, width, color, 33);
+	mainWindow(argc, argv, "Glass",height, width, color,0,0, 33,"RightArrow");
 }
 
 void mainWindow(int argc, char**argv, char *windowName, int height, int width, char *color)
 {
-	mainWindow(argc, argv, windowName, height, width, color, 33);
+	mainWindow(argc, argv, windowName, height, width, color,0,0, 33,"RightArrow");
 }
+
+void mainWindow(int argc, char**argv, int height, int width, char *color, int RefreshRate)
+{
+	mainWindow(argc, argv, "Glass", height, width, color, 0, 0, RefreshRate,"RightArror");
+}
+
+void mainWindow(int argc, char**argv,char*windowName, int height, int width, char *color, int WindowPosition_x, int WindowPositon_y)
+{
+	mainWindow(argc, argv, windowName, height, width, color, WindowPosition_x, WindowPositon_y, 33, "RightArrow");
+}
+
+void mainWindow(int argc, char**argv,char*windowName, int height, int width, char *color, int WindowPosition_x, int WindowPositon_y, int RefreshRate)
+{
+	mainWindow(argc, argv, windowName, height, width, color, WindowPosition_x, WindowPositon_y, RefreshRate, "RightArrow");
+}
+
+
+void mainWindow(int argc, char**argv, int height, int width, char *color,int WindowPosition_x,int WindowPositon_y, int RefreshRate)
+{
+	mainWindow(argc, argv, "Glass", height, width, color, WindowPosition_x, WindowPositon_y, RefreshRate,"RightArrow");
+}
+
+void mainWindow(int argc, char**argv, int height, int width, char *color, int WindowPosition_x, int WindowPositon_y)
+{
+	mainWindow(argc, argv, "Glass", height, width, color, WindowPosition_x, WindowPositon_y, 33,"RightArrow");
+}
+
+void mainWindow(int argc, char**argv,int height,int width)
+{
+	mainWindow(argc, argv, "Glass", height, width, "Black");
+}
+
+void mainWindow(int argc, char**argv, char* windowName)
+{
+	mainWindow(argc, argv, windowName, 400, 400, "Black");
+}
+
+void mainWindow(int argc, char**argv)
+{
+	mainWindow(argc, argv, "Glass", 400, 400, "Black");
+}
+
+void mainWindow(int argc, char**argv, char *windowName, int height, int width)
+{
+	mainWindow(argc, argv, windowName, height, width, "Black");
+}
+
 
 void MouseButtons(int button, int state, int mouseX, int mouseY)
 {
@@ -1016,7 +980,7 @@ void InputText(double x, double y, char* nameofstring, int sizeofstring, char* c
 
 //______________________________shape_________________________________________________________________//
 
-void StartShape(char*color, char*state)
+void StartShape(char*state, char*color)
 {
 	SetState(state);
 	SetColor(color);
