@@ -509,6 +509,20 @@ void Text(double x, double y, char *string, char *color, char *style = "NULL")
 
 }
 
+void Text(int x, int y, double text, char *color, char *style = "NULL")
+{
+	char e[50];
+	_snprintf_s(e, 50, "%f", text);
+	Text(x, y, e, color, style);
+}
+
+void Text(double x, double y, double text, char *color, char *style = "NULL")
+{
+	char e[50];
+	_snprintf_s(e, 50, "%f", text);
+	Text(x, y, e, color, style);
+}
+
 void Text(int x, int y, int text, char *color, char *style = "NULL")
 {
 	char e[20];
