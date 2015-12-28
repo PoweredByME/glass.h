@@ -14,7 +14,8 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.*/
 
-
+  //_____________________________________________Licence_______-----------------------------------------//
+ //
 // The liberary is powered by M.E.//
 
 // This code is Created by Ali Danish and Saad Ahmad. Students of NUST H-12 pakistan// 
@@ -95,6 +96,31 @@ void ScreenClear() // to clear screen
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
+void SetFont(char* Font, char *size, char *c)
+{
+	if ((strcmp(Font, "Helvetica") == 0) && (strcmp(size, "Small") == 0))
+	{
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10, *c);
+	}
+	else if (((strcmp(Font, "Helvetica") == 0) || (strcmp(Font, "timesNewRoman") == 0)) && (strcmp(size, "Medium") == 0))
+	{
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, *c);
+	}
+	else if ((strcmp(Font, "Helvetica") == 0) && (strcmp(size, "Large") == 0))
+	{
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
+	}
+	else if ((strcmp(Font, "timesNewRoman") == 0) && (strcmp(size, "Small") == 0))
+	{
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *c);
+	}
+	else if ((strcmp(Font, "timesNewRoman") == 0) && (strcmp(size, "Large") == 0))
+	{
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *c);
+	}
+	else
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
+}
 
 void SetState(char *state) // for setting the state
 {
@@ -467,14 +493,14 @@ void DrawLine(int __x1, int __y1, int __x2, int __y2, char * color)
 
 //_________________________________________Text_______________________________________________________--//
 
-void Text(int x, int y, char *string, char *color, char *style = "NULL")
+void Text(int x, int y, char *string, char *color, char* Font, char*size ,char *style = "NULL")
 {
 
 	char *c;
 	SetColor(color);
 	glRasterPos2f(x, y);
 	for (c = string; *c != '\0'; c++) {
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
+		SetFont(Font, size, c);
 	}
 
 	if (strcmp(style, "Underline") == 0)
@@ -483,19 +509,19 @@ void Text(int x, int y, char *string, char *color, char *style = "NULL")
 	}
 	if (strcmp(style, "Bold") == 0)
 	{
-		Text(x + 1, y, string, color);
+		Text(x + 1, y, string, color,Font,size);
 	}
 
 }
 
-void Text(double x, double y, char *string, char *color, char *style = "NULL")
+void Text(double x, double y, char *string, char *color, char* Font, char*size, char *style = "NULL")
 {
 
 	char *c;
 	SetColor(color);
 	glRasterPos2f(x, y);
 	for (c = string; *c != '\0'; c++) {
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
+		SetFont(Font, size, c);
 	}
 
 	if (strcmp(style, "Underline") == 0)
@@ -504,9 +530,19 @@ void Text(double x, double y, char *string, char *color, char *style = "NULL")
 	}
 	if (strcmp(style, "Bold") == 0)
 	{
-		Text(x + 1, y, string, color);
+		Text(x + 1, y, string, color,Font,size);
 	}
 
+}
+
+void Text(int x, int y, char *string, char *color, char *style = "NULL")
+{
+   Text(x,y,string,color,"Helvetica","Large",style);
+}
+
+void Text(double x, double y, char *string, char *color, char *style = "NULL")
+{
+   Text(x,y,string,color,"Helvetica","Large",style);
 }
 
 void Text(int x, int y, double text, char *color, char *style = "NULL")
@@ -783,7 +819,7 @@ void CreateCircle(double x, double y, int radius, char * color, char *state){
 
 //_____________________----functionality for keyboard___________________________________________________//
 
-void InputText(double x, double y, char* nameofstring, int sizeofstring, char* color)
+void InputText(double x, double y, char* nameofstring, int sizeofstring, char* color, char* Font, char* size)
 {
 	int a = strlen(nameofstring);
 	char* stringText = (char*)calloc(sizeofstring + 1, 4);
@@ -988,7 +1024,12 @@ void InputText(double x, double y, char* nameofstring, int sizeofstring, char* c
 	}
 
 	Keyboard = 0;
-	Text(x, y, nameofstring, color);
+	Text(x, y, nameofstring, color,Font,size);
+}
+
+void InputText(double x, double y, char* nameofstring, int sizeofstring, char* color)
+{
+   InputText(x,y,nameofstring,sizeofstring,color,"Helvetica","Large
 }
 //___________________________----function for keyboard---__________________________________________________??//
 
