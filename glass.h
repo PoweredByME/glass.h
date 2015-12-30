@@ -56,6 +56,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.*/
 #define SHIFT GLUT_ACTIVE_SHIFT
 #define ENTER 13
 
+int __Ali_saad123 = 11;
+
 //___________________________________________________________________________________________________________//
 int g_Width = 400;		//define size of the window
 int g_Height = 400;
@@ -93,6 +95,16 @@ void myDisplayFunction();
 void ScreenClear() // to clear screen
 {
 	glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void ClearScreen() // to clear screen
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void _as___change(int a)
+{
+	__Ali_saad123 = a;
 }
 
 void SetFont(char* Font, char *size, char *c)
@@ -232,11 +244,12 @@ void SetCursor(char* CursorType)
 }
 
 
-void mainWindow(int argc, char**argv, char *windowName = "Glass", int height = 400, int width = 400, char *color = "Black", int WindowPosition_x = 0, int WindowPosition_y = 0, int RefreshRate = 33, char*CursorType = "RightArrow")
+void mainWindow(int argc, char**argv, char *windowName = "Glass", int height = 400, int width = 400, char *color = "Black", int WindowPosition_x = 0, int WindowPosition_y = 0, int RefreshRate = 11, char*CursorType = "RightArrow")
 {
 
+	
 	glutInit(&argc, argv);		//initilize the GLUT libraray
-
+	_as___change(RefreshRate);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);		//has four colour components red, green,blue, and alpha 
 	glutInitWindowSize(height, width);	//size of window
 	glutInitWindowPosition(WindowPosition_x,WindowPosition_y);		//poistion of window
@@ -335,7 +348,7 @@ void mainWindow(int argc, char**argv, char *windowName = "Glass", int height = 4
 
 }
 
-void MainWindow(int argc, char**argv, char *windowName = "Glass", int height = 400, int width = 400, char *color = "Black", int WindowPosition_x = 0, int WindowPosition_y = 0, int RefreshRate = 33, char*CursorType = "RightArrow")
+void MainWindow(int argc, char**argv, char *windowName = "Glass", int height = 400, int width = 400, char *color = "Black", int WindowPosition_x = 0, int WindowPosition_y = 0, int RefreshRate = 11, char*CursorType = "RightArrow")
 {
 	mainWindow(argc, argv, windowName, height, width, color, WindowPosition_x, WindowPosition_y, RefreshRate, CursorType);
 }
@@ -391,7 +404,7 @@ void myReshapeFunction(int width, int height)
 
 void myTimerFunction(int val)
 {
-	glutTimerFunc(33, myTimerFunction, 0);
+	glutTimerFunc(__Ali_saad123, myTimerFunction, 0);
 	myDisplayFunction();
 }
 
@@ -484,13 +497,26 @@ void Text(double x, double y, double text, char *color = "Black", char* Font = "
 	Text(x, y, e, color, Font,size,style);
 }
 
-void Text(double x, double y, long text, char *color = "Black", char* Font = "Helvetica", char*size = "Large", char *style = "NULL")
+void Text(int x, int y, double text, char *color = "Black", char* Font = "Helvetica", char*size = "Large", char *style = "NULL")
+{
+	char e[50];
+	_snprintf_s(e, 50, "%f", text);
+	Text(x, y, e, color, Font, size, style);
+}
+
+void Text(int x, int y, int text, char *color = "Black", char* Font = "Helvetica", char*size = "Large", char *style = "NULL")
 {
 	char e[20];
 	_itoa_s(text, e, 10);
-	Text(x, y, e, color,Font,size, style);
+	Text(x, y, e, color, Font, size, style);
 }
 
+void Text(double x, double y, int text, char *color = "Black", char* Font = "Helvetica", char*size = "Large", char *style = "NULL")
+{
+	char e[20];
+	_itoa_s(text, e, 10);
+	Text(x, y, e, color, Font, size, style);
+}
 
 //__________________________________________________________Text________________________________________________//
 
