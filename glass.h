@@ -14,9 +14,8 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.*/
 
-  //_____________________________________________Licence_______-----------------------------------------//
- //
-// The liberary is powered by M.E.//
+
+// The library is made by  De'Burgers(PoweredByM.E.)//
 
 // This code is Created by Ali Danish and Saad Ahmad. Students of NUST H-12 pakistan// 
 
@@ -233,7 +232,7 @@ void SetCursor(char* CursorType)
 }
 
 
-void mainWindow(int argc, char**argv, char *windowName, int height, int width, char *color,int WindowPosition_x,int WindowPosition_y, int RefreshRate,char*CursorType)
+void mainWindow(int argc, char**argv, char *windowName = "Glass", int height = 400, int width = 400, char *color = "Black", int WindowPosition_x = 0, int WindowPosition_y = 0, int RefreshRate = 33, char*CursorType = "RightArrow")
 {
 
 	glutInit(&argc, argv);		//initilize the GLUT libraray
@@ -332,71 +331,14 @@ void mainWindow(int argc, char**argv, char *windowName, int height, int width, c
 
 	//	glutFullScreen();	// make the screen fullscreen
 	SetCursor(CursorType);	//Displays the type of cursor u want
-
-
-
 	glutMainLoop();
 
 }
 
-
-
-void mainWindow(int argc, char**argv, int height, int width, char *color)
+void MainWindow(int argc, char**argv, char *windowName = "Glass", int height = 400, int width = 400, char *color = "Black", int WindowPosition_x = 0, int WindowPosition_y = 0, int RefreshRate = 33, char*CursorType = "RightArrow")
 {
-	mainWindow(argc, argv, "Glass",height, width, color,0,0, 33,"RightArrow");
+	mainWindow(argc, argv, windowName, height, width, color, WindowPosition_x, WindowPosition_y, RefreshRate, CursorType);
 }
-
-void mainWindow(int argc, char**argv, char *windowName, int height, int width, char *color)
-{
-	mainWindow(argc, argv, windowName, height, width, color,0,0, 33,"RightArrow");
-}
-
-void mainWindow(int argc, char**argv, int height, int width, char *color, int RefreshRate)
-{
-	mainWindow(argc, argv, "Glass", height, width, color, 0, 0, RefreshRate,"RightArror");
-}
-
-void mainWindow(int argc, char**argv,char*windowName, int height, int width, char *color, int WindowPosition_x, int WindowPositon_y)
-{
-	mainWindow(argc, argv, windowName, height, width, color, WindowPosition_x, WindowPositon_y, 33, "RightArrow");
-}
-
-void mainWindow(int argc, char**argv,char*windowName, int height, int width, char *color, int WindowPosition_x, int WindowPositon_y, int RefreshRate)
-{
-	mainWindow(argc, argv, windowName, height, width, color, WindowPosition_x, WindowPositon_y, RefreshRate, "RightArrow");
-}
-
-
-void mainWindow(int argc, char**argv, int height, int width, char *color,int WindowPosition_x,int WindowPositon_y, int RefreshRate)
-{
-	mainWindow(argc, argv, "Glass", height, width, color, WindowPosition_x, WindowPositon_y, RefreshRate,"RightArrow");
-}
-
-void mainWindow(int argc, char**argv, int height, int width, char *color, int WindowPosition_x, int WindowPositon_y)
-{
-	mainWindow(argc, argv, "Glass", height, width, color, WindowPosition_x, WindowPositon_y, 33,"RightArrow");
-}
-
-void mainWindow(int argc, char**argv,int height,int width)
-{
-	mainWindow(argc, argv, "Glass", height, width, "Black");
-}
-
-void mainWindow(int argc, char**argv, char* windowName)
-{
-	mainWindow(argc, argv, windowName, 400, 400, "Black");
-}
-
-void mainWindow(int argc, char**argv)
-{
-	mainWindow(argc, argv, "Glass", 400, 400, "Black");
-}
-
-void mainWindow(int argc, char**argv, char *windowName, int height, int width)
-{
-	mainWindow(argc, argv, windowName, height, width, "Black");
-}
-
 
 void MouseButtons(int button, int state, int mouseX, int mouseY)
 {
@@ -493,7 +435,7 @@ void DrawLine(int __x1, int __y1, int __x2, int __y2, char * color)
 
 //_________________________________________Text_______________________________________________________--//
 
-void Text(int x, int y, char *string, char *color, char* Font, char*size ,char *style = "NULL")
+void Text(int x, int y, char *string, char *color="Black", char* Font="Helvetica", char*size="Large" ,char *style = "NULL")
 {
 
 	char *c;
@@ -514,7 +456,7 @@ void Text(int x, int y, char *string, char *color, char* Font, char*size ,char *
 
 }
 
-void Text(double x, double y, char *string, char *color, char* Font, char*size, char *style = "NULL")
+void Text(double x, double y, char *string, char *color="Black", char* Font = "Helvetica", char*size = "Large", char *style = "NULL")
 {
 
 	char *c;
@@ -535,64 +477,27 @@ void Text(double x, double y, char *string, char *color, char* Font, char*size, 
 
 }
 
-void Text(int x, int y, char *string, char *color, char *style = "NULL")
-{
-   Text(x,y,string,color,"Helvetica","Large",style);
-}
-
-void Text(double x, double y, char *string, char *color, char *style = "NULL")
-{
-   Text(x,y,string,color,"Helvetica","Large",style);
-}
-
-void Text(int x, int y, double text, char *color, char *style = "NULL")
+void Text(double x, double y, double text, char *color = "Black", char* Font = "Helvetica", char*size = "Large", char *style = "NULL")
 {
 	char e[50];
 	_snprintf_s(e, 50, "%f", text);
-	Text(x, y, e, color, style);
+	Text(x, y, e, color, Font,size,style);
 }
 
-void Text(double x, double y, double text, char *color, char *style = "NULL")
-{
-	char e[50];
-	_snprintf_s(e, 50, "%f", text);
-	Text(x, y, e, color, style);
-}
-
-void Text(int x, int y, int text, char *color, char *style = "NULL")
+void Text(double x, double y, long text, char *color = "Black", char* Font = "Helvetica", char*size = "Large", char *style = "NULL")
 {
 	char e[20];
 	_itoa_s(text, e, 10);
-	Text(x, y, e, color, style);
+	Text(x, y, e, color,Font,size, style);
 }
 
-void Text(double x, double y, int text, char *color, char *style = "NULL")
-{
-	char e[20];
-	_itoa_s(text, e, 10);
-	Text(x, y, e, color, style);
-}
-
-void Text(int x, int y, long text, char *color, char *style = "NULL")
-{
-	char e[20];
-	_itoa_s(text, e, 10);
-	Text(x, y, e, color, style);
-}
-
-void Text(float x, float y, long text, char *color, char *style = "NULL")
-{
-	char e[20];
-	_itoa_s(text, e, 10);
-	Text(x, y, e, color, style);
-}
 
 //__________________________________________________________Text________________________________________________//
 
 
 //________________________Triangle______________________________________________________________________?//
 
-void CreateTriangle(double __x1, double __y1, double __x2, double __y2, double __x3, double __y3, char * color, char * state)
+void CreateTriangle(double __x1, double __y1, double __x2, double __y2, double __x3, double __y3, char * color="Black", char * state="Filled")
 {
 	SetState(state);
 	SetColor(color);
@@ -603,7 +508,7 @@ void CreateTriangle(double __x1, double __y1, double __x2, double __y2, double _
 	glEnd();
 }
 
-void CreateTriangle(int __x1, int __y1, int __x2, int __y2, int __x3, int __y3, char * color, char * state)
+void CreateTriangle(int __x1, int __y1, int __x2, int __y2, int __x3, int __y3, char * color = "Black", char * state = "Filled")
 {
 	SetState(state);
 	SetColor(color);
@@ -618,7 +523,7 @@ void CreateTriangle(int __x1, int __y1, int __x2, int __y2, int __x3, int __y3, 
 
 //__________________________________________RECTANGLE_____________________________________________________--//
 
-void CreateRectangle(int x, int y, int height, int lenght, char * color, char * state)
+void CreateRectangle(int x, int y, int height, int lenght, char * color = "Black", char * state = "Filled")
 {
 	SetState(state);
 	SetColor(color);
@@ -630,7 +535,7 @@ void CreateRectangle(int x, int y, int height, int lenght, char * color, char * 
 	glEnd();
 }
 
-void CreateRectangle(double x, double y, double height, double lenght, char * color, char * state)
+void CreateRectangle(double x, double y, double height, double lenght, char * color="Black", char * state="Filled")
 {
 	SetState(state);
 	SetColor(color);
@@ -681,7 +586,7 @@ void CreateRectangle(int x, int y, int height, int lenght, char * color, char * 
 
 //________________________________________--ellipse__________________________________________________?//
 
-void CreateEllipse(double origin_x, double origin_y, double max_height, double max_width, char*color, char*state)
+void CreateEllipse(double origin_x, double origin_y, double max_height, double max_width, char * color = "Black", char * state = "Filled")
 {
 	double angle = 0;
 	SetState(state);
@@ -695,7 +600,7 @@ void CreateEllipse(double origin_x, double origin_y, double max_height, double m
 	glEnd();
 }
 
-void CreateEllipse(int origin_x, int origin_y, int max_height, int max_width, char*color, char*state)
+void CreateEllipse(int origin_x, int origin_y, int max_height, int max_width, char * color = "Black", char * state = "Filled")
 {
 	double angle = 0;
 	SetState(state);
@@ -722,7 +627,7 @@ void  CreateEllipse(double origin_x, double origin_y, double max_height, double 
 //___________________________________________--ELLIPSE--_________________________________________________?//
 
 //___________________________________________________________-circle-__________________________________//
-void CreateCircle(int x, int y, int radius, char * color, char *state){
+void CreateCircle(int x, int y, int radius, char * color = "Black", char * state = "Filled"){
 	float angle;
 	SetState(state);
 	SetColor(color);
@@ -736,32 +641,18 @@ void CreateCircle(int x, int y, int radius, char * color, char *state){
 	glEnd();
 }
 
-void CreateCircle(int x, int y, int radius, char* color, char*state, int LineThickness)
-{
-	double r = radius;
-	for (float c = 0; c <= 1 * LineThickness; c += 1)
+void CreateCircle(double x, double y, double radius, char * color = "Black", char * state = "Filled"){
+	float angle;
+	SetState(state);
+	SetColor(color);
+	glLineWidth(1.0f);
+
+	for (int i = 0; i < 120; i++)
 	{
-		CreateCircle(x, y, r, color, state);
-		r -= 0.5;
+		angle = i * 2 * M_PI / 100;
+		glVertex2f(x + (cos(angle + 5) * radius), y + (sin(angle + 5) * radius));
 	}
-}
-void CreateCircle(int x, int y, double radius, char* color, char*state, int LineThickness)
-{
-	double r = radius;
-	for (float c = 0; c <= 1 * LineThickness; c += 1)
-	{
-		CreateCircle(x, y, r, color, state);
-		r -= 0.5;
-	}
-}
-void CreateCircle(double x, double y, int radius, char* color, char*state, int LineThickness)
-{
-	double r = radius;
-	for (float c = 0; c <= 1 * LineThickness; c += 1)
-	{
-		CreateCircle(x, y, radius, color, state);
-		r -= 0.5;
-	}
+	glEnd();
 }
 
 void CreateCircle(double x, double y, double radius, char* color, char*state, int LineThickness)
@@ -773,53 +664,12 @@ void CreateCircle(double x, double y, double radius, char* color, char*state, in
 		r -= 0.5;
 	}
 }
-void CreateCircle(double x, double y, double radius, char * color, char *state){
-	float angle;
-	SetState(state);
-	SetColor(color);
-	glLineWidth(1.0f);
-
-	for (int i = 0; i < 120; i++)
-	{
-		angle = i * 2 * M_PI / 100;
-		glVertex2f(x + (cos(angle + 5) * radius), y + (sin(angle + 5) * radius));
-	}
-	glEnd();
-}
-
-void CreateCircle(int x, int y, double radius, char * color, char *state){
-	float angle;
-	SetState(state);
-	SetColor(color);
-	glLineWidth(1.0f);
-
-	for (int i = 0; i < 120; i++)
-	{
-		angle = i * 2 * M_PI / 100;
-		glVertex2f(x + (cos(angle + 5) * radius), y + (sin(angle + 5) * radius));
-	}
-	glEnd();
-}
-
-void CreateCircle(double x, double y, int radius, char * color, char *state){
-	float angle;
-	SetState(state);
-	SetColor(color);
-	glLineWidth(1.0f);
-
-	for (int i = 0; i < 120; i++)
-	{
-		angle = i * 2 * M_PI / 100;
-		glVertex2f(x + (cos(angle + 5) * radius), y + (sin(angle + 5) * radius));
-	}
-	glEnd();
-}
 
 /////__________________________------circle------____________________________________________//
 
 //_____________________----functionality for keyboard___________________________________________________//
 
-void InputText(double x, double y, char* nameofstring, int sizeofstring, char* color, char* Font, char* size)
+void InputText(double x, double y, char* nameofstring, int sizeofstring, char* color="Black", char* Font = "Helvetica", char* size="Large")
 {
 	int a = strlen(nameofstring);
 	char* stringText = (char*)calloc(sizeofstring + 1, 4);
@@ -1027,15 +877,11 @@ void InputText(double x, double y, char* nameofstring, int sizeofstring, char* c
 	Text(x, y, nameofstring, color,Font,size);
 }
 
-void InputText(double x, double y, char* nameofstring, int sizeofstring, char* color)
-{
-   InputText(x,y,nameofstring,sizeofstring,color,"Helvetica","Large
-}
 //___________________________----function for keyboard---__________________________________________________??//
 
 //______________________________shape_________________________________________________________________//
 
-void StartShape(char*state, char*color)
+void StartShape(char*state="Black", char*color="Filled")
 {
 	SetState(state);
 	SetColor(color);
