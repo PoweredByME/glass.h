@@ -18,7 +18,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.*/
 // The library is made by  De'Burgers(PoweredByM.E.)//
 
 // This code is Created by Ali Danish and Saad Ahmad. Students of NUST H-12 pakistan// 
-#define _MSC_VER
+//#define _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
 #include<Windows.h>
 #include<mmsystem.h>
@@ -1397,5 +1397,3 @@ void UploadImage(GLuint ImageID, int x, int y, int image_height, int image_width
 }
 
 //----------------------------------------------------------------------------------------------------------------//
-
-#endif
