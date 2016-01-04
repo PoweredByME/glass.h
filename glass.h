@@ -260,7 +260,8 @@ void mainWindow(int argc, char**argv, char *windowName = "Glass", int height = 4
 
 	
 	glutInit(&argc, argv);		//initilize the GLUT libraray
-	_as___change(RefreshRate);
+	FreeConsole();
+        _as___change(RefreshRate);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);		//has four colour components red, green,blue, and alpha 
 	glutInitWindowSize(width,height);	//size of window
 	glutInitWindowPosition(WindowPosition_x,WindowPosition_y);		//poistion of window
@@ -364,7 +365,8 @@ void mainWindowLoop(int argc, char**argv, char *windowName = "Glass", int height
 
 
 	glutInit(&argc, argv);		//initilize the GLUT libraray
-	_as___change(RefreshRate);
+	FreeConsole();
+        _as___change(RefreshRate);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);		//has four colour components red, green,blue, and alpha 
 	glutInitWindowSize(width, height);	//size of window
 	glutInitWindowPosition(WindowPosition_x, WindowPosition_y);		//poistion of window
