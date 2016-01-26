@@ -1211,6 +1211,34 @@ void ___123__draw(GLuint id, int x, int y, int wd, int ht)
 	glDisable(GL_TEXTURE_2D);
 }
 
+void ___123__draw(GLuint id, double x, double y, double wd, double ht)
+{
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, id);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	// Enable transparency
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glScalef(1, 1, 1);
+	glColor4ub(255, 255, 255, 255);
+
+	glBegin(GL_POLYGON);
+
+	glTexCoord2f(0.0, 0.0);		glVertex2i(x, y + ht);
+	glTexCoord2f(1.0, 0.0);		glVertex2f(x + wd, y + ht);
+	glTexCoord2f(1.0, 1.0);		glVertex2f(x + wd, y);
+	glTexCoord2f(0.0, 1.0);		glVertex2f(x, y);
+
+	glEnd();
+	glDisable(GL_BLEND);
+	glDisable(GL_TEXTURE_2D);
+}
+
+
 // checkSize: Make sure its a power of 2.
 int checkSize(int x)
 {
@@ -1398,4 +1426,85 @@ void UploadImage(GLuint ImageID, int x, int y, int image_height, int image_width
 	___123__draw(ImageID,  x,  y,  image_width, image_height);
 }
 
+void UploadImage(GLuint ImageID, double x, double y, double image_height, double image_width)
+{
+	___123__draw(ImageID, x, y, image_width, image_height);
+}
+
+bool Animation(GLuint *imageArray, int imageArraySize,int origin_x, int origin_y, int imageHeight, int imageWidht, unsigned int _delayFrames=3)
+{
+	static int calls = 0;
+	static int counter = 0;
+	static bool Returner = false;
+	___123__draw(imageArray[counter], origin_x, origin_y,  imageWidht, imageHeight);
+	if (counter == ((imageArraySize)-1))
+	{
+		counter = 0; Returner = true;
+	}
+	else if (calls%_delayFrames == 0)
+	{
+		counter++; Returner = false;
+	}
+	if (calls == _delayFrames * 10)
+		calls = 0;
+	calls++;
+	if (Returner == true)
+		return true;
+	else
+		return false;
+}
+
+bool MultiAnimation(GLuint *imageArray, int imageArraySize, double origin_x, double origin_y, double imageHeight, double imageWidht,bool Reset = false, unsigned int _delayFrames = 3)
+{
+	static int calls = 0;
+	static int counter = 0;
+	static bool Returner = false;
+	if (Reset == true)
+	{
+		calls = 0; counter = 0; Returner = false;
+	}
+	___123__draw(imageArray[counter], origin_x, origin_y, imageWidht, imageHeight);
+	if (counter == ((imageArraySize)-1))
+	{
+		counter = 0; Returner = true;
+	}
+	else if (calls%_delayFrames == 0)
+	{
+		counter++; Returner = false;
+	}
+	if (calls == _delayFrames * 10)
+		calls = 0;
+	calls++;
+	if (Returner == true)
+		return true;
+	else
+		return false;
+}
+
+bool MultiAnimation(GLuint *imageArray, int imageArraySize, int origin_x, int origin_y, int imageHeight, int imageWidht, bool Reset = false, unsigned int _delayFrames = 3)
+{
+	static int calls = 0;
+	static int counter = 0;
+	static bool Returner = false;
+	if (Reset == true)
+	{
+		calls = 0; counter = 0; Returner = false;
+	}
+	___123__draw(imageArray[counter], origin_x, origin_y, imageWidht, imageHeight);
+	if (counter == ((imageArraySize)-1))
+	{
+		counter = 0; Returner = true;
+	}
+	else if (calls%_delayFrames == 0)
+	{
+		counter++; Returner = false;
+	}
+	if (calls == _delayFrames * 10)
+		calls = 0;
+	calls++;
+	if (Returner == true)
+		return true;
+	else
+		return false;
+}
 //----------------------------------------------------------------------------------------------------------------//
