@@ -101,6 +101,21 @@ void myDisplayFunction();
 
 //_______________________________________________________________________________________________________________//
 
+struct SpriteSheet {
+	GLuint _imageID;
+	double orignalHeight;
+	double orignalWidth;
+};
+
+struct SpriteSlice {
+	SpriteSheet spriteSheetID;
+	double slice_origin_x;
+	double slice_origin_y;
+	double slice_height;
+	double slice_width;
+};
+
+
 //_____________________________________________---Support functions---________________________________________?//
 
 void ScreenClear() // to clear screen
@@ -180,7 +195,7 @@ void SetColor(char *color) // function to set color
 	}
 	else if (strcmp(color, "Purple") == 0)
 	{
-		glColor4f(1.0, 0.0, 1.0,1.0);
+		glColor4f(1.0, 0.0, 1.0, 1.0);
 	}
 	else if (strcmp(color, "Cyan") == 0)
 	{
@@ -234,19 +249,19 @@ void init(void)
 
 void SetCursor(char* CursorType)
 {
-	if (strcmp(CursorType, "RightArrow")==0)
+	if (strcmp(CursorType, "RightArrow") == 0)
 	{
 		glutSetCursor(GLUT_CURSOR_RIGHT_ARROW);
 	}
-	else if (strcmp(CursorType, "LeftArrow")==0)
+	else if (strcmp(CursorType, "LeftArrow") == 0)
 	{
 		glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
 	}
-	else if (strcmp(CursorType, "InformationArrow")==0)
+	else if (strcmp(CursorType, "InformationArrow") == 0)
 	{
 		glutSetCursor(GLUT_CURSOR_INFO);
 	}
-	else if (strcmp(CursorType, "QuestionMarkArrow")==0)
+	else if (strcmp(CursorType, "QuestionMarkArrow") == 0)
 	{
 		glutSetCursor(GLUT_CURSOR_HELP);
 	}
@@ -258,115 +273,10 @@ void SetCursor(char* CursorType)
 void mainWindow(int argc, char**argv, char *windowName = "Glass", int height = 400, int width = 400, char *color = "Black", int WindowPosition_x = 0, int WindowPosition_y = 0, int RefreshRate = 11, char*CursorType = "RightArrow")
 {
 
-	
-	glutInit(&argc, argv);		//initilize the GLUT libraray
-	FreeConsole();
-        _as___change(RefreshRate);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);		//has four colour components red, green,blue, and alpha 
-	glutInitWindowSize(width,height);	//size of window
-	glutInitWindowPosition(WindowPosition_x,WindowPosition_y);		//poistion of window
-	glutCreateWindow(windowName);
-
-	if (strcmp(color, "Black") == 0)
-	{
-		glClearColor(0.0, 0.0, 0.0, 0.0);
-	}
-	else if (strcmp(color, "Red") == 0)
-	{
-		glClearColor(1.0, 0.0, 0.0, 0.0);
-	}
-	else if (strcmp(color, "Blue") == 0)
-	{
-		glClearColor(0.0, 0.0, 1.0, 0.0);
-	}
-	else if (strcmp(color, "Green") == 0)
-	{
-		glClearColor(0.0, 1.0, 0.0, 0.0);
-	}
-	else if (strcmp(color, "White") == 0)
-	{
-		glClearColor(1.0, 1.0, 1.0, 0.0);
-	}
-	else if (strcmp(color, "Yellow") == 0)
-	{
-		glClearColor(1.0, 1.0, 0.0, 0.0);
-	}
-	else if (strcmp(color, "Purple") == 0)
-	{
-		glClearColor(1.0, 0.0, 1.0, 0.0);
-	}
-	else if (strcmp(color, "Cyan") == 0)
-	{
-		glClearColor(0.0, 1.0, 1.0, 0.0);
-	}
-	else if (strcmp(color, "Orange") == 0)
-	{
-		glClearColor(1.0, 0.5, 0.0, 0.0);
-	}
-	else if (strcmp(color, "DarkRed") == 0)
-	{
-		glClearColor(1.0, 0.0, 0.0, 0.9);
-	}
-	else if (strcmp(color, "GreenishYellow") == 0)
-	{
-		glClearColor(0.5, 1.0, 0.0,0.0);
-	}
-	else if (strcmp(color, "LightGreen") == 0)
-	{
-		glClearColor(0.5, 1.0, 0.5, 0.0);
-	}
-	else if (strcmp(color, "DarkGreen") == 0)
-	{
-		glClearColor(0.0, 0.5, 0.0, 0.0);
-	}
-	else if (strcmp(color, "Brown") == 0)
-	{
-		glClearColor(0.5, 0.35, 0.05, 0.0);
-	}
-	else if (strcmp(color, "Grey") == 0)
-	{
-		glClearColor(0.8, 0.8, 0.8, 1.0);
-	}
-	else if (strcmp(color, "DarkGrey") == 0)
-	{
-		glClearColor(0.2, 0.2, 0.2, 1.0);
-	}
-	else if (strcmp(color, "Magenta") == 0)
-	{
-		glClearColor(1.0, 0.0, 1.0,0.0);
-	}
-	else
-		glClearColor(0.0, 0.0, 0.0, 0.0);		//background color of openGl window
-	//			 ^red, green, blue, alpha(opens) 
-	glMatrixMode(GL_PROJECTION);		//glMatrixMode — specify which matrix is the current matrix ????
-	glLoadIdentity();		//glLoadIdentity — replace the current matrix with the identity matrix	????
-
-	glOrtho(0.0, g_Width, 0.0, g_Height, -1.0, 1.0);
-
-	glutMouseFunc(MouseButtons);
-	glutMotionFunc(Amotion);
-
-	glutPassiveMotionFunc(Pmotion);
-	glutKeyboardFunc(myKeyboardFunction);
-	glutSpecialFunc(mySpecialKeysFunction);
-
-	glutReshapeFunc(myReshapeFunction);
-	glutDisplayFunc(myDisplayFunction);
-	glutTimerFunc(RefreshRate, myTimerFunction, 0);
-
-	//	glutFullScreen();	// make the screen fullscreen
-	SetCursor(CursorType);	//Displays the type of cursor u want
-	glutMainLoop();
-
-}
-
-void mainWindowLoop(int argc, char**argv, char *windowName = "Glass", int height = 400, int width = 400, char *color = "Black", int WindowPosition_x = 0, int WindowPosition_y = 0, int RefreshRate = 11, char*CursorType = "RightArrow")
-{
-
 
 	glutInit(&argc, argv);		//initilize the GLUT libraray
 	FreeConsole();
-        _as___change(RefreshRate);
+	_as___change(RefreshRate);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);		//has four colour components red, green,blue, and alpha 
 	glutInitWindowSize(width, height);	//size of window
 	glutInitWindowPosition(WindowPosition_x, WindowPosition_y);		//poistion of window
@@ -442,7 +352,112 @@ void mainWindowLoop(int argc, char**argv, char *windowName = "Glass", int height
 	}
 	else
 		glClearColor(0.0, 0.0, 0.0, 0.0);		//background color of openGl window
-	//			 ^red, green, blue, alpha(opens) 
+												//			 ^red, green, blue, alpha(opens) 
+	glMatrixMode(GL_PROJECTION);		//glMatrixMode — specify which matrix is the current matrix ????
+	glLoadIdentity();		//glLoadIdentity — replace the current matrix with the identity matrix	????
+
+	glOrtho(0.0, g_Width, 0.0, g_Height, -1.0, 1.0);
+
+	glutMouseFunc(MouseButtons);
+	glutMotionFunc(Amotion);
+
+	glutPassiveMotionFunc(Pmotion);
+	glutKeyboardFunc(myKeyboardFunction);
+	glutSpecialFunc(mySpecialKeysFunction);
+
+	glutReshapeFunc(myReshapeFunction);
+	glutDisplayFunc(myDisplayFunction);
+	glutTimerFunc(RefreshRate, myTimerFunction, 0);
+
+	//	glutFullScreen();	// make the screen fullscreen
+	SetCursor(CursorType);	//Displays the type of cursor u want
+	glutMainLoop();
+
+}
+
+void mainWindowLoop(int argc, char**argv, char *windowName = "Glass", int height = 400, int width = 400, char *color = "Black", int WindowPosition_x = 0, int WindowPosition_y = 0, int RefreshRate = 11, char*CursorType = "RightArrow")
+{
+
+
+	glutInit(&argc, argv);		//initilize the GLUT libraray
+	FreeConsole();
+	_as___change(RefreshRate);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);		//has four colour components red, green,blue, and alpha 
+	glutInitWindowSize(width, height);	//size of window
+	glutInitWindowPosition(WindowPosition_x, WindowPosition_y);		//poistion of window
+	glutCreateWindow(windowName);
+
+	if (strcmp(color, "Black") == 0)
+	{
+		glClearColor(0.0, 0.0, 0.0, 0.0);
+	}
+	else if (strcmp(color, "Red") == 0)
+	{
+		glClearColor(1.0, 0.0, 0.0, 0.0);
+	}
+	else if (strcmp(color, "Blue") == 0)
+	{
+		glClearColor(0.0, 0.0, 1.0, 0.0);
+	}
+	else if (strcmp(color, "Green") == 0)
+	{
+		glClearColor(0.0, 1.0, 0.0, 0.0);
+	}
+	else if (strcmp(color, "White") == 0)
+	{
+		glClearColor(1.0, 1.0, 1.0, 0.0);
+	}
+	else if (strcmp(color, "Yellow") == 0)
+	{
+		glClearColor(1.0, 1.0, 0.0, 0.0);
+	}
+	else if (strcmp(color, "Purple") == 0)
+	{
+		glClearColor(1.0, 0.0, 1.0, 0.0);
+	}
+	else if (strcmp(color, "Cyan") == 0)
+	{
+		glClearColor(0.0, 1.0, 1.0, 0.0);
+	}
+	else if (strcmp(color, "Orange") == 0)
+	{
+		glClearColor(1.0, 0.5, 0.0, 0.0);
+	}
+	else if (strcmp(color, "DarkRed") == 0)
+	{
+		glClearColor(1.0, 0.0, 0.0, 0.9);
+	}
+	else if (strcmp(color, "GreenishYellow") == 0)
+	{
+		glClearColor(0.5, 1.0, 0.0, 0.0);
+	}
+	else if (strcmp(color, "LightGreen") == 0)
+	{
+		glClearColor(0.5, 1.0, 0.5, 0.0);
+	}
+	else if (strcmp(color, "DarkGreen") == 0)
+	{
+		glClearColor(0.0, 0.5, 0.0, 0.0);
+	}
+	else if (strcmp(color, "Brown") == 0)
+	{
+		glClearColor(0.5, 0.35, 0.05, 0.0);
+	}
+	else if (strcmp(color, "Grey") == 0)
+	{
+		glClearColor(0.8, 0.8, 0.8, 1.0);
+	}
+	else if (strcmp(color, "DarkGrey") == 0)
+	{
+		glClearColor(0.2, 0.2, 0.2, 1.0);
+	}
+	else if (strcmp(color, "Magenta") == 0)
+	{
+		glClearColor(1.0, 0.0, 1.0, 0.0);
+	}
+	else
+		glClearColor(0.0, 0.0, 0.0, 0.0);		//background color of openGl window
+												//			 ^red, green, blue, alpha(opens) 
 	glMatrixMode(GL_PROJECTION);		//glMatrixMode — specify which matrix is the current matrix ????
 	glLoadIdentity();		//glLoadIdentity — replace the current matrix with the identity matrix	????
 
@@ -568,7 +583,7 @@ void DrawLine(int __x1, int __y1, int __x2, int __y2, char * color)
 
 //_________________________________________Text_______________________________________________________--//
 
-void Text(int x, int y, char *string, char *color="Black", char* Font="Helvetica", char*size="Large" ,char *style = "NULL")
+void Text(int x, int y, char *string, char *color = "Black", char* Font = "Helvetica", char*size = "Large", char *style = "NULL")
 {
 
 	char *c;
@@ -584,12 +599,12 @@ void Text(int x, int y, char *string, char *color="Black", char* Font="Helvetica
 	}
 	if (strcmp(style, "Bold") == 0)
 	{
-		Text(x + 1, y, string, color,Font,size);
+		Text(x + 1, y, string, color, Font, size);
 	}
 
 }
 
-void Text(double x, double y, char *string, char *color="Black", char* Font = "Helvetica", char*size = "Large", char *style = "NULL")
+void Text(double x, double y, char *string, char *color = "Black", char* Font = "Helvetica", char*size = "Large", char *style = "NULL")
 {
 
 	char *c;
@@ -605,7 +620,7 @@ void Text(double x, double y, char *string, char *color="Black", char* Font = "H
 	}
 	if (strcmp(style, "Bold") == 0)
 	{
-		Text(x + 1, y, string, color,Font,size);
+		Text(x + 1, y, string, color, Font, size);
 	}
 
 }
@@ -614,7 +629,7 @@ void Text(double x, double y, double text, char *color = "Black", char* Font = "
 {
 	char e[50];
 	_snprintf_s(e, 50, "%f", text);
-	Text(x, y, e, color, Font,size,style);
+	Text(x, y, e, color, Font, size, style);
 }
 
 void Text(int x, int y, double text, char *color = "Black", char* Font = "Helvetica", char*size = "Large", char *style = "NULL")
@@ -643,7 +658,7 @@ void Text(double x, double y, int text, char *color = "Black", char* Font = "Hel
 
 //________________________Triangle______________________________________________________________________?//
 
-void CreateTriangle(double __x1, double __y1, double __x2, double __y2, double __x3, double __y3, char * color="Black", char * state="Filled")
+void CreateTriangle(double __x1, double __y1, double __x2, double __y2, double __x3, double __y3, char * color = "Black", char * state = "Filled")
 {
 	SetState(state);
 	SetColor(color);
@@ -681,7 +696,7 @@ void CreateRectangle(int x, int y, int height, int lenght, char * color = "Black
 	glEnd();
 }
 
-void CreateRectangle(double x, double y, double height, double lenght, char * color="Black", char * state="Filled")
+void CreateRectangle(double x, double y, double height, double lenght, char * color = "Black", char * state = "Filled")
 {
 	SetState(state);
 	SetColor(color);
@@ -760,20 +775,20 @@ void CreateEllipse(int origin_x, int origin_y, int max_height, int max_width, ch
 	glEnd();
 }
 
-void  CreateEllipse(double origin_x, double origin_y, double max_height, double max_width, char*color, char*state,int LineThickness)
+void  CreateEllipse(double origin_x, double origin_y, double max_height, double max_width, char*color, char*state, int LineThickness)
 {
 	for (int c = 0; c <= LineThickness; c++)
 	{
 		CreateEllipse(origin_x, origin_y, max_height, max_width, color, state);
-		max_height-=0.5;
-		max_width-=0.5;
+		max_height -= 0.5;
+		max_width -= 0.5;
 	}
 }
 
 //___________________________________________--ELLIPSE--_________________________________________________?//
 
 //___________________________________________________________-circle-__________________________________//
-void CreateCircle(int x, int y, int radius, char * color = "Black", char * state = "Filled"){
+void CreateCircle(int x, int y, int radius, char * color = "Black", char * state = "Filled") {
 	float angle;
 	SetState(state);
 	SetColor(color);
@@ -787,7 +802,7 @@ void CreateCircle(int x, int y, int radius, char * color = "Black", char * state
 	glEnd();
 }
 
-void CreateCircle(double x, double y, double radius, char * color = "Black", char * state = "Filled"){
+void CreateCircle(double x, double y, double radius, char * color = "Black", char * state = "Filled") {
 	float angle;
 	SetState(state);
 	SetColor(color);
@@ -815,7 +830,7 @@ void CreateCircle(double x, double y, double radius, char* color, char*state, in
 
 //_____________________----functionality for keyboard___________________________________________________//
 
-void InputText(double x, double y, char* nameofstring, int sizeofstring, char* color="Black", char* Font = "Helvetica", char* size="Large")
+void InputText(double x, double y, char* nameofstring, int sizeofstring, char* color = "Black", char* Font = "Helvetica", char* size = "Large")
 {
 	int a = strlen(nameofstring);
 	char* stringText = (char*)calloc(sizeofstring + 1, 4);
@@ -1020,14 +1035,14 @@ void InputText(double x, double y, char* nameofstring, int sizeofstring, char* c
 	}
 
 	Keyboard = 0;
-	Text(x, y, nameofstring, color,Font,size);
+	Text(x, y, nameofstring, color, Font, size);
 }
 
 //___________________________----function for keyboard---__________________________________________________??//
 
 //______________________________shape_________________________________________________________________//
 
-void StartShape(char*state="Black", char*color="Filled")
+void StartShape(char*state = "Black", char*color = "Filled")
 {
 	SetState(state);
 	SetColor(color);
@@ -1245,7 +1260,7 @@ int checkSize(int x)
 	if (x == 2 || x == 4 ||
 		x == 8 || x == 16 ||
 		x == 32 || x == 64 ||
-		x == 128 || x == 256 || x == 512||x==1024)
+		x == 128 || x == 256 || x == 512 || x == 1024)
 		return 1;
 	else return 0;
 }
@@ -1421,40 +1436,36 @@ int loadTGA(char *name, int id)
 	return 1;
 }
 
-void UploadImage(GLuint ImageID, int x, int y, int image_height, int image_width)
-{
-	___123__draw(ImageID,  x,  y,  image_width, image_height);
-}
-
-void UploadImage(GLuint ImageID, double x, double y, double image_height, double image_width)
+void UploadImage(GLuint ImageID, int x, int y, int image_height, int image_width)    //display the image on the screen
 {
 	___123__draw(ImageID, x, y, image_width, image_height);
 }
 
-bool Animation(GLuint *imageArray, int imageArraySize,int origin_x, int origin_y, int imageHeight, int imageWidht, unsigned int _delayFrames=3)
+void UploadImage(GLuint ImageID, double x, double y, double image_height, double image_width)  // display the image on the screen
+{
+	___123__draw(ImageID, x, y, image_width, image_height);
+}
+
+void Animation(GLuint *imageArray, int imageArraySize, int origin_x, int origin_y, int imageHeight, int imageWidht, unsigned int _delayFrames = 3)   // animate an array of image indefinately... only for one animation display
 {
 	static int calls = 0;
 	static int counter = 0;
-	static bool Returner = false;
-	___123__draw(imageArray[counter], origin_x, origin_y,  imageWidht, imageHeight);
+	//static bool Returner = false;
+	___123__draw(imageArray[counter], origin_x, origin_y, imageWidht, imageHeight);
 	if (counter == ((imageArraySize)-1))
 	{
-		counter = 0; Returner = true;
+		counter = 0; //Returner = true;
 	}
 	else if (calls%_delayFrames == 0)
 	{
-		counter++; Returner = false;
+		counter++; //Returner = false;
 	}
 	if (calls == _delayFrames * 10)
 		calls = 0;
 	calls++;
-	if (Returner == true)
-		return true;
-	else
-		return false;
 }
 
-bool MultiAnimation(GLuint *imageArray, int imageArraySize, double origin_x, double origin_y, double imageHeight, double imageWidht,bool Reset = false, unsigned int _delayFrames = 3)
+bool MultiAnimation(GLuint *imageArray, int imageArraySize, double origin_x, double origin_y, double imageHeight, double imageWidht, unsigned int _delayFrames = 3, bool Reset = false)  //animate and array of images
 {
 	static int calls = 0;
 	static int counter = 0;
@@ -1481,7 +1492,7 @@ bool MultiAnimation(GLuint *imageArray, int imageArraySize, double origin_x, dou
 		return false;
 }
 
-bool MultiAnimation(GLuint *imageArray, int imageArraySize, int origin_x, int origin_y, int imageHeight, int imageWidht, bool Reset = false, unsigned int _delayFrames = 3)
+bool MultiAnimation(GLuint *imageArray, int imageArraySize, int origin_x, int origin_y, int imageHeight, int imageWidht, unsigned int _delayFrames = 3, bool Reset = false)   //Animate an array of images.
 {
 	static int calls = 0;
 	static int counter = 0;
@@ -1507,4 +1518,111 @@ bool MultiAnimation(GLuint *imageArray, int imageArraySize, int origin_x, int or
 	else
 		return false;
 }
-//----------------------------------------------------------------------------------------------------------------//
+//-------------------------------------Constructors --------------------------------------------------//
+
+SpriteSheet LoadSheet(GLuint imageID, int imageOrignalHeight, int imageOrignalWidth)
+{
+	SpriteSheet *holder = (SpriteSheet*)malloc(sizeof(struct SpriteSheet));
+	if (holder != NULL)
+	{
+		holder->_imageID = imageID;
+		holder->orignalHeight = imageOrignalHeight;
+		holder->orignalWidth = imageOrignalWidth;
+		return (*holder);
+	}
+	else
+		return (*holder);
+}
+
+SpriteSlice LoadSlice(SpriteSheet sprite_Sheet_ID, double pos_x, double pos_y, double slice_height, double slice_width)// makes the sprite sheet in user defined slices.
+{
+	SpriteSlice* holder = (SpriteSlice*)malloc(sizeof(struct SpriteSlice));
+	if (holder != NULL)
+	{
+		holder->spriteSheetID = sprite_Sheet_ID;
+		holder->slice_origin_x = pos_x;
+		holder->slice_origin_y = pos_y;
+		holder->slice_height = slice_height;
+		holder->slice_width = slice_width;
+		return (*holder);
+	}
+	else
+		return (*holder);
+}
+
+//_________________________________________________________________________________________________________________//
+void ___123__draw1(GLuint id, double pos_x, double pos_y, double bh, double bw, double x, double y, double ht, double wd)
+{
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, id);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	// Enable transparency
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glScalef(1, 1, 1);
+	glColor4ub(255, 255, 255, 255);
+
+	glBegin(GL_POLYGON);
+
+	glTexCoord2f(pos_x, pos_y);            glVertex2f(x, y + ht);
+	glTexCoord2f(pos_x + bw, pos_y);		glVertex2f(x + wd, y + ht);
+	glTexCoord2f(pos_x + bw, pos_y + bh);		glVertex2f(x + wd, y);
+	glTexCoord2f(pos_x, pos_y + bh);			glVertex2i(x, y);
+
+	glEnd();
+	glDisable(GL_BLEND);
+	glDisable(GL_TEXTURE_2D);
+}
+//_________________________________________________________________________________________________________//
+bool MultiAnimation(SpriteSlice *SliceArray, int SliceArraySize, double display_x, double display_y, double display_height, double display_Width, unsigned int _delayFrame = 1, bool Reset = false)// Animate the SpriteSlice array.
+{
+	static int counter = 0;
+	static int calls = 0;
+	static bool Returner = false;
+	if (Reset == true)
+	{
+		counter = 0; calls = 0; Returner = false;
+	}
+	else;
+
+	SpriteSlice s = SliceArray[counter];
+	SpriteSheet a = s.spriteSheetID;
+	GLuint _Image = a._imageID;
+	double orignal_h = a.orignalHeight;
+	double orignal_w = a.orignalWidth;
+	double slice_x1 = s.slice_origin_x;
+	double slice_y1 = s.slice_origin_y;
+	double slice_h1 = s.slice_height;
+	double slice_w1 = s.slice_width;
+	double slice_x = slice_x1 / orignal_w;
+	double slice_y = slice_y1 / orignal_h;
+	double slice_h = slice_h1 / orignal_h;
+	double slice_w = slice_w1 / orignal_w;
+
+	Text(100, 400, slice_x);
+	Text(200, 400, slice_y); Text(300, 400, slice_h); Text(400, 430, slice_w);
+	___123__draw1(_Image, slice_x, slice_y, slice_h, slice_w, display_x, display_y, display_height, display_Width);
+
+	if (counter == (SliceArraySize - 1))
+	{
+		counter = 0; Returner = true;
+	}
+	else if (calls%_delayFrame == 0)
+	{
+		counter++; Returner = false;
+	}
+	else;
+
+	if (calls == _delayFrame * 10)
+		calls = 0;
+	else
+		calls++;
+	if (Returner == true)
+		return true;
+	else
+		return false;
+}
