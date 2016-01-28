@@ -78,6 +78,11 @@ It contains two function in it... which are also mandatory for you to write.
          THESE TWO FUNCTIONS. 
   
 
+   Note: Sometimes... a linker error might occur... if it does then make sure you have written 
+   myDisplayFunction  and its body... if you have see if you have written the spellings 
+   correctly.
+
+
 
 >>>>>>>NAMING THE WINDOW.
 
@@ -304,11 +309,119 @@ Chapter # 3:-
    }
 
 
+Similarly, you can use there functions too to make triangles and draw lines
+
+>>>>CreateTriangle(double x1,double y1, double x2, double y2, double x3, double y3, "Color", "state");
+
+    Function is used to create a triangle and takes x and y coordinates of 3 vertices 
+in first 6 parameters and next parameter defines color and last parameter is for state (Filled or Hollow).
+x1, y1, x2, y2, x3, y3, the corrdinates of its three axes.   
+Use your sense of geometry to figure out the orientation of your triangle.
+FOR EXAMPLE :
+
+    CreateTriangle(50, 50, 100, 150, 300, 20, "Yellow", "Filled");
+
+>>>>DrawLine(double x1, double y1, double x2, double y2, "Color"); 
+    
+    Function is used to draw a line on screen and takes x and y coordinates of end points of
+line as first 4 parameters and last parameter is to define color of line 
+x1 and y1 are the coordinate of the first point of the line and the x2 and y2
+are the coordinate of the final point of the line.
 
 
 
+CHAPTER # 4 
+ 
+                 USING TEXT...
+          
+        To write a text on your graphics screen, glass.h provides you with a very good function.
+        
+ Text(double x, double y, "Text String", "Color" ,"Font", "size", "state" );
+
+ -> x and y tell the coordinates of the lower left corner of the text feild. 
+ -> "Text String" is the string you want to be displayed on the screen and 
+    if you want to display a number (int or double) you can do it too...
+    Text(double x, double y, (double/int) variable name, "Color" ,"Font", "size", "state" );
+ -> By default font is "Helvetica" and there is only one other font that is 
+    "timesNewRoman"
+ -> By default the font size is "Large", and the other sizes are "Small" and "Large".
+ -> By default the style is normal ("NULL")and the other two are "Bold", and "Underlined".
+ 
+Try using this code:-
+
+#include<glass.h>
+
+int counter = 0;
+
+void main(int argc, char** argv)
+{
+   MainWindow(argc,argv);
+}
+void myDisplayFunction()
+{
+    ClearScreen();
+    Text(10.0,30.0, "Hello world","White");
+    Text(350.0,30.0,counter,"Blue","timesNewRoman")
+    if(counter>=100)
+    {
+    Text(10,100,"I made a logic that when the", "Red", "Helvetica", "Large", "Bold");
+    Text(10,140,"counter reacher 100 this text", "Grey", "timesNewRoman","Large");
+    Text(10,180,"should appear.","White","Helvetica","Helvetica","Medium");
+    }
+    RefreshScreen();
+}
 
 
+CHAPTER # 6
+             
+                 INPUTING TEXT
+                 
+        In glass with a single commang you can enable the entire keyboard and input 
+        the text....
+      
+ InputText(double x, double y, char* characterArray, int ArraySize, "Color","Font", "Size");
+ 
+ -> Here there is a bit trick part the charater array (char* characterArray which can be written as
+    char charaterArray[]).
+    Actually, if you write a text on the screen you would definately want to store it somewhere
+    so, you will give a string array to the InputText function where it can store all those 
+    things... more over even if you input a numerical like int or double... the function 
+    will consider it to be a string you'll then convert that sting to desired datatype.
+   
+ Try understanding this code:-
+ 
+ 
+ #include<glass.h>
+ char characterArray[20];
+ bool enable = false;          //just a bool variable. 
+
+ void main(int argc, char** argv)
+ {
+    MainWindow(argc, argc,"Hello",400,500,"Blue");
+ }
+
+ void myDisplayFunction()
+ {
+ ClearScreen();
+ 
+ Text(10,30,"Enter your name below :- ");
+ InputText(10,70,characterArray, 20);
+ Text(10,370,"Press Enter after entering the name");
+ 
+ if(Key == 13)            //13 is ASCII code of enter
+ {                         //Key is the built in variable that detects the keys
+ enable = true;            //of the keyboard... but you have to give the ASCII 
+ }                         // code to it
+ if(enable==true)
+ {
+ Text(10,110,"Hello!!!"); 
+ Text(10,150,characterArray,"White");    
+ } 
+ Key = 0;              //Key reinitiallizing... good practise.
+ RefreshScreen();
+ }
+                 
+                        
 
 
 
