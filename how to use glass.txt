@@ -1,3 +1,316 @@
+           
+                                             <<<<<<HOW TO USE GLASS.H>>>>>>
+
+     
+   Chapter # 1
+                        
+                        MAKING A MAIN WINDOW OUTSIDE A CONSOLE WINDOW.
+
+   First of, you must know that a good old console cannot display cool graphics. To display
+   graphics we have to create a window capable of doing that outside of console. Glass makes
+   it an easier job for you to do.
+   
+   Take a look at ths piece of code.
+   
+   #include<glass.h>
+   
+   void main(int argc, char** argv)
+   {
+   MainWindow(argc,argv);
+   }
+    
+   void myDisplayFunction()
+   {
+   ClearScreen();
+   RefreshScreen();
+   }
+
+  Let us dissect this piece of code. 
+  
+  -> First the preprocesor includes glass.h liberary.
+  -> Then, comes the main function with two very very unuasual argument i.e. argc and argv.
+     These two argument are used to project a graphics screen from a console screen and they
+     are mandtory to write as it is... You may think of them as a part of syntax in glass.h
+  -> The MainWindow(...) function takes those to argument and creates a default screen of 
+     400 x 400 pixels with a black background and 11ms RefreshRate.
+
+WARNING: If you are running first time glass.h on your computer(visual studio 2013 or 2015)
+... then you might encounter an error:-
+
+  Error C2381 'exit': redefinition; __declspec(noreturn) differs ConsoleApplication14 
+  c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdlib.h 50--
+  
+    TO RECTIFY this error, click on the error (in visul studio 2013 or 2015). Stdlib.h will open
+    and a line will be selected in its code. Comment it out by (//) two forward slashes, the save 
+    the update stdlib.h on desktop. The open the include folder where you have pasted glass.h. Then
+    delete stdlib.h there and cut paste the updated stdlib in that include folder.And you are
+    good to go.
+
+
+>>>>>>>>void myDisplayFunction()
+      
+      This is the function (outside and must always be written below main) which will 
+      display all of you graphics... It may be drawn shapes and images etc. You have to 
+      write it as it is too... when ever you use glass.h. Otherwise the code will never
+      works. 
+     
+      (((You don't have to call it explicitly in main for it is automatically called in the main
+      Window function)))
+      
+It contains two function in it... which are also mandatory for you to write.
+
+-> ClearScreen(): It clears the screen every time the myDisplayFunction is called it the mainWindow.
+ 
+ <<<NOTE: myDisplayFunction is called repeatedly in mainWindow at a time acording to the 
+ refresh rate of the mainWindow. By default the RefreshRate is 11ms. It means that 
+ myDisplayFunction is called after ever 11ms.>>>  
+        YOU CAN CONSIDER MYDISPLAYFUNCTION AS A NEVER ENDING BUT VERY USEFULL LOOP.
+        YOU WILL HAVE TO WRITE WHATEVER CODE WHILE KEEPING THIS POINT INTO YOUR 
+        CONSIDERATION.
+        
+        ALSO. LOOPS DON'T WORK IN MYDISPLAYFUNCTION... USE THEM OUT SIDE MYDISPLAYFUNCTION 
+
+->  RefreshScreen():  This function swaps the buffers of the screen... don't dive deep into
+    this thing just remember that with this code writen at the end nothing will be diplay. 
+    
+    
+         ALL THE CODE THAT YOU WANT TO BE DISPLAYED ON SCREEN WILL BE WRITTEN BETWEEN 
+         THESE TWO FUNCTIONS. 
+  
+
+
+>>>>>>>NAMING THE WINDOW.
+
+    You can name the window like this:-
+    
+    Try this code:-
+    
+    #include<glass.h>
+   
+   void main(int argc, char** argv)
+   {
+        MainWindow(argc,argv, "WindowName");
+   }
+    
+   void myDisplayFunction()
+   {
+   ClearScreen();
+   RefreshScreen();
+   } 
+    
+    ->For a window's name you will pass a string.
+    ->By default the name of the window is "Glass".
+
+>>>>>>>RESIZING THE WINDOW.
+   
+    You can resize the main window like this.
+    
+    #include<glass.h>
+   
+   void main(int argc, char** argv)
+   {
+    MainWindow(argc,argv, "WindowName", 500,500);  //first is height and then width
+   }
+    
+   void myDisplayFunction()
+   {
+   ClearScreen();
+   RefreshScreen();
+   } 
+
+   -> It only accepts integers 
+   -> By Default, the height and width are 400px.
+   -> All the measurements in glass are by pixels.
+
+>>> Changing the background color:-
+
+You can do this by:-
+  #include<glass.h>
+   
+   void main(int argc, char** argv)
+   {
+        MainWindow(argc,argv, "WindowName", 500, 500, "Blue");
+   }
+    
+   void myDisplayFunction()
+   {
+   ClearScreen();
+   RefreshScreen();
+   } 
+
+   -> You pass a string with color name written.
+   
+>>> REPOSITIONING THE WINDOW:-
+
+   You can reposition the window as:-
+   #include<glass.h>
+   
+   void main(int argc, char** argv)
+   {
+        MainWindow(argc,argv, "WindowName", 500, 500,"Red", 0,0);
+   }
+    
+   void myDisplayFunction()
+   {
+   ClearScreen();
+   RefreshScreen();
+   } 
+   
+-> By default they are 0 and it is recommended that you don't 
+   change them unless you really mean it.
+-> First you give x and then y coordinate... these are the 
+   coordinates of the upper left corner of the Main Window.
+   
+   
+>>> CHANGING THE REFRESH RATE:-
+
+You call change the refresh rate by this:-
+   
+      void main(int argc, char** argv)
+   {
+        MainWindow(argc,argv, "WindowName", 500, 500,"White",0,0, 33);
+   }
+    
+   void myDisplayFunction()
+   {
+   ClearScreen();
+   RefreshScreen();
+   } 
+   
+   -> By default it is 11ms and you should not 
+      temper with it. 
+  
+  
+  The entire MainWindow function:-
+  
+  MainWindow(int argc, char** argv, "Window's Name", int windowHeight, int windowWidth,
+             "BackGround Color", int windowPosition_x, int windowPosition_y, int RefreshRate)
+  
+  You will be able to see this in intellisense... it is quit helpful.
+  
+  
+ CHAPTER # 2:-
+           
+                 COLORS IN GLASS.H 
+                 
+        Right now the colors in it are as:-         
+->	Black
+->	Red
+->	Blue
+->	Green
+->	White
+->	Yellow
+->	Purple
+->	Cyan
+->	Orange 
+->      Grey
+->      DarkGrey
+->      LightGreen
+->      DarkGreen
+  
+  
+Chapter # 3:-  
+  
+                 DRAWING SIMPLE SHAPES IN GLASS.H
+  
+  You can drew shapes like Squares , circles , ellipse , triangle , rectangles and line in 
+  glass.h by using some really simple command.
+  
+>>> RECTANGLE AND SQUARE:-
+
+  You can write a Create command in between the ClearScreen and RefreshScreen functions 
+  to make these shapes... 
+  
+  For rectangles and squares you write like this:-
+  
+  CreateRectangle(double x-coordinate, double y-coordinate, double height, double widht, "Color", "State");
+   
+  -> x-coordinate... is the x-coordinate of the upper left corner of the rectangle.
+  -> y-coordinate... is the y-coordinate of the upper left corner of the rectangle.
+  -> Other parameter are self-explainatory.
+   
+   #include<glass.h>
+   void main(int argc, char** argv)
+   {
+        MainWindow(argc,argv, "WindowName", 500, 500,"White");
+   }
+    
+   void myDisplayFunction()
+   {
+   ClearScreen();
+   
+   CreateRectangle(100.0,100.0,30.0,30.0,"Blue","Filled");
+   /* This command will create a filled blue circle.*/
+   RefreshScreen();
+   }
+
+>>  HOLLOW RECTANGLE:-  
+  
+  The command is :-
+  CreateRectangle(double x-coordinate, double y-coordinate, double height, double widht, "Color",
+                  "State", int LineThickness_evenNumbers);
+   
+ -> Everything is the same but an other parameter of line thickness is added
+    it tell about the thickness of the boundary line of the hollow rectangle.
+    
+    Try this piece of code:-
+   #include<glass.h>
+   void main(int argc, char** argv)
+   {
+        MainWindow(argc,argv, "WindowName", 500, 500,"White");
+   }
+    
+   void myDisplayFunction()
+   {
+   ClearScreen();
+   
+   CreateRectangle(100.0,100.0,30.0,30.0,"Blue","Hollow", 4);
+   
+   RefreshScreen();
+   }
+
+    BY DEFAULT LINE THICKNESS IS 1. You can also write as:-
+    
+    CreateRectangle(100.0,100.0,30.0,30.0,"Blue","Hollow");
+
+
+>>>>> CIRCLES:-
+
+  Ths Create commade for a circle is:-
+   
+  CreateCircle(double x-coordinate, double y-coordinate, double radius,"color","state",
+               int LineThickness); 
+  
+ -> x-coordinate... is the x-coordinate of the origin of the circle.
+ -> y-coordinate... is the y-coordinate of the origin of the circle.
+ -> LineThickness... here it can be give as any positive integer. 
+ 
+ Try this code:- 
+#include<glass.h>
+   void main(int argc, char** argv)
+   {
+        MainWindow(argc,argv, "WindowName");
+   }
+    
+   void myDisplayFunction()
+   {
+   ClearScreen();
+   CreateCircle(230.0,220.0,20,"Red","Filled");
+   CreateRectangle(100.0,100.0,30.0,30.0,"Blue","Hollow", 4);
+   CreateRectangle(100.0,200.0,40.0,30.0,"Orange");
+   CreateCircle(300.0,300.0, 20.0,"White","Hollow");
+   CreateCircle(100.0,300.0,24.0,"Blue","Hollow",5);
+   RefreshScreen();
+   }
+
+
+
+
+
+
+
+
+
 
                                    <<<<<<<<<<<<<<<<<<<<<<<<<<<<glass.h>>>>>>>>>>>>>>>>>>>>>>>>>>
 Try every code like presented in the following example… you will grasp the basics of graphics and animation…
@@ -19,7 +332,7 @@ refreshScreen();
 }
 
 (((NOTE: WHEN YOU WILL RUN THIS CODE AN ERROR MIGHT OCCUR  --Severity Code Description Project File Line
-Error C2381 'exit': redefinition; __declspec(noreturn) differs ConsoleApplication14 c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdlib.h 50-- To rectify that click on the error (in visul studio 2013 or 2015). Stdlib.h will open and a line will be selected in its code. Comment it out by (//) two forward slashes, the save the update stdlib.h on desktop. The open the include folder where you have pasted glass.h. Then delete stdlib.h there and cut paste the updated stdlib in that include folder.))))))))) 
+))))))))) 
 
 
 
