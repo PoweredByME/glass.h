@@ -1387,7 +1387,7 @@ int loadTGA(char *name, int id)
 	int imageBits, size;
 	FILE *s;
 
-	if (!(s = fopen(name, "r+b")))
+	if ((fopen_s(&s,name, "r+b")))
 		return TGA_FILE_NOT_FOUND;
 
 	fread(&type, sizeof(char), 3, s); // read in colormap info and image type, byte 0 ignored
