@@ -1602,9 +1602,6 @@ bool MultiAnimation(SpriteSlice *SliceArray, int SliceArraySize, double display_
 	double slice_y = slice_y1 / orignal_h;
 	double slice_h = slice_h1 / orignal_h;
 	double slice_w = slice_w1 / orignal_w;
-
-	Text(100, 400, slice_x);
-	Text(200, 400, slice_y); Text(300, 400, slice_h); Text(400, 430, slice_w);
 	___123__draw1(_Image, slice_x, slice_y, slice_h, slice_w, display_x, display_y, display_height, display_Width);
 
 	if (counter == (SliceArraySize - 1))
