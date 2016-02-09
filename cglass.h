@@ -1800,7 +1800,7 @@ namespace ObjectiveGlass {        //the objective glass start.
 		//Function to rotate from the center
 		void Rotate(double angle)
 		{
-			double radian = angle*M_PI / 180;
+			double radian = -angle*M_PI / 180;
 			MeasureRadius();
 			lx1 = origin_x + LineRadius*cos(M_PI + radian);
 			ly1 = origin_y + LineRadius*sin(M_PI + radian);
@@ -1816,7 +1816,7 @@ namespace ObjectiveGlass {        //the objective glass start.
 				axis_X = inLine_axis_X; axis_Y = inLine_axis_Y;  // For the first call.
 				RotateCall = true;
 			}
-			double radian = angle*M_PI / 180;
+			double radian = -angle*M_PI / 180;
 			double lineRadius = pow((axis_X - lx1), 2) + pow((axis_Y - ly1), 2);
 			lineRadius = sqrt(lineRadius);
 			double lineRadius1 = pow((axis_X - lx2), 2) + pow((axis_Y - ly2), 2);
@@ -1835,7 +1835,7 @@ namespace ObjectiveGlass {        //the objective glass start.
 				axis_X = outLine_axis_X; axis_Y = outLine_axis_Y;
 			}
 			else;
-			double radian = angle*M_PI / 180;
+			double radian = -angle*M_PI / 180;
 			double OrigintoAxes = sqrt(pow((axis_X - origin_x), 2) + pow((axis_Y - origin_y), 2));
 
 			origin_x = axis_X - OrigintoAxes* cos(radian);
@@ -1846,8 +1846,8 @@ namespace ObjectiveGlass {        //the objective glass start.
 			lx2 = origin_x - TotalLenght / 2;
 			ly2 = origin_y;
 
-			double radian1 = (angle - 30)*M_PI / 180;
-			radian1 += 90;
+			double radian1 = -(angle - 30)*M_PI / 180;
+			radian1 -= 90;
 			MeasureRadius();
 			lx1 = origin_x + LineRadius*cos(M_PI + radian1);
 			ly1 = origin_y + LineRadius*sin(M_PI + radian1);
@@ -1858,8 +1858,8 @@ namespace ObjectiveGlass {        //the objective glass start.
 
 		void Revolve(double outLine_axis_X, double outLine_axis_Y, double Revolve_Angle, double Spin_Angle)
 		{
-			double angle = Revolve_Angle;
-			double Orientation_Angle = Spin_Angle;
+			double angle = -Revolve_Angle;
+			double Orientation_Angle = -Spin_Angle;
 			if (RevolveCall == false) {
 				axis_X = outLine_axis_X; axis_Y = outLine_axis_Y;
 			}
@@ -1876,7 +1876,7 @@ namespace ObjectiveGlass {        //the objective glass start.
 			ly2 = origin_y;
 
 			double radian1 = (Orientation_Angle)*M_PI / 180;
-			radian1 += 90;
+			radian1 -= 90;
 			MeasureRadius();
 			lx1 = origin_x + LineRadius*cos(M_PI + radian1);
 			ly1 = origin_y + LineRadius*sin(M_PI + radian1);
@@ -2012,7 +2012,7 @@ namespace ObjectiveGlass {        //the objective glass start.
 		}
 
 		void sqRotate(double angle) {
-			double radian = -1 * angle * M_PI / 180;
+			double radian = 1 * angle * M_PI / 180;
              
 			double pangle = atan((givenHeight / 2) / (givenWidth / 2))*180/M_PI;
 
@@ -2032,7 +2032,7 @@ namespace ObjectiveGlass {        //the objective glass start.
 		}
 
 		void reRotate(double angle) {
-		   	double radian = -1 * angle * M_PI / 180;
+		   	double radian = 1 * angle * M_PI / 180;
         	double pangle = atan((givenHeight / 2) / (givenWidth / 2)) * 180 / M_PI;
         	double multi = pangle / 180;
 
@@ -2117,7 +2117,8 @@ namespace ObjectiveGlass {        //the objective glass start.
 			{
 				sqRotate(angle);
 			}
-			else {
+			else
+			{
 				reRotate(angle);
 			}
 		}
