@@ -452,12 +452,47 @@ CHAPTER # 6
   {
   ClearScreen();
   
-  
+  CreateRectangle(x,20,30,30,"White","Filled");
+  x++;             //increment on every call
   
   RefreshScreen();
   }
                         
+  
+  So, what is happening here.
+  
+ -> A global variable 'x' is made.
+ -> Then the 'x' is passed to the CreateRectangle(...) function in its 
+     x-coordinate. 
+ -> Then, the 'x' variable is inceremented at every call, which by default is happening
+    after every 11ms.
+ 
+ You will see the square moving and then it will go beyod the boundaries of the window.
+ Well to stop it will have to make a logic like this...
+ 
+  #include<glass.h>
+  
+  int x = 30; // a global variable for the x-coordinate of the origin of the shape.
+  
+  void main(int argc, char** argv)
+  {
+     MainWindow(argc, argv, "GlassMovements", 600, 500, "Blue");  
+  }
+  
+  void myDisplayFunction()
+  {
+  ClearScreen();
+  
+  CreateRectangle(x,20,30,30,"White","Filled");
+  if(!(x>=470))  //as long as x-coordinate is within the limits.
+  {
+     x++; //increment;  
+  }
+  
+  RefreshScreen();
+  } 
 
+ 
 
 
                                    <<<<<<<<<<<<<<<<<<<<<<<<<<<<glass.h>>>>>>>>>>>>>>>>>>>>>>>>>>
