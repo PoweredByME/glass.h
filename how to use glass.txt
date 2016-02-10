@@ -381,7 +381,7 @@ CHAPTER # 6
       
  InputText(double x, double y, char* characterArray, int ArraySize, "Color","Font", "Size");
  
- -> Here there is a bit trick part the charater array (char* characterArray which can be written as
+ -> Here there is a bit tricky part the charater array (char* characterArray which can be written as
     char charaterArray[]).
     Actually, if you write a text on the screen you would definately want to store it somewhere
     so, you will give a string array to the InputText function where it can store all those 
@@ -421,6 +421,41 @@ CHAPTER # 6
  RefreshScreen();
  }
                  
+                 
+                  
+        Chapter # 7:
+        
+                        MOVEMENTS
+                   
+        On of the best prks of playing with the graphics is that you can enjoy moving 
+        different shapes you drew on the screen. 
+        
+        But, how would you achieve that goal.
+        
+        Well glass.h provides you with a novel and easier way to achieve all of these movements.
+        
+  Simple movement can be done almost instantly by using simple logics.
+  
+  Let us take a look at the followin code:-
+  
+  
+  #include<glass.h>
+  
+  int x = 30; // a global variable for the x-coordinate of the origin of the shape.
+  
+  void main(int argc, char** argv)
+  {
+     MainWindow(argc, argv, "GlassMovements", 600, 500, "Blue");  
+  }
+  
+  void myDisplayFunction()
+  {
+  ClearScreen();
+  
+  
+  
+  RefreshScreen();
+  }
                         
 
 
