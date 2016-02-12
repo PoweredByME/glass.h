@@ -194,6 +194,12 @@ You call change the refresh rate by this:-
   You will be able to see this in intellisense... it is quit helpful.
   
   
+      
+   ////ONE THAT YOU MUST KEEP IN MIND IS THAT THE ORIGIN OF THE GRAPHICS WINDOW IS AT THE UPPER LEFT
+   CORNER OF THE SCREEN AT THE X-AXIS IS POSITIVE FROM LEFT TO RIGTH AND Y-AXIS IS POSITIVE FROM 
+   TOP TO BOTTOM./////
+  
+  
  CHAPTER # 2:-
            
                  COLORS IN GLASS.H 
@@ -425,9 +431,9 @@ CHAPTER # 6
                   
         Chapter # 7:
         
-                        MOVEMENTS
+                  <-------MOVEMENTS--------->
                    
-        On of the best prks of playing with the graphics is that you can enjoy moving 
+        On of the best perks of playing with the graphics is that you can enjoy moving 
         different shapes you drew on the screen. 
         
         But, how would you achieve that goal.
@@ -468,7 +474,7 @@ CHAPTER # 6
     after every 11ms.
  
  You will see the square moving and then it will go beyod the boundaries of the window.
- Well to stop it will have to make a logic like this...
+ Well to stop it we will have to make a logic like this...
  
   #include<glass.h>
   
@@ -492,7 +498,140 @@ CHAPTER # 6
   RefreshScreen();
   } 
 
- 
+   -> Here as long as the x-cooridnate of the shape is within the limit... that is, in this case 
+   470 pixels. The x-coordinatre will keep on increasing and when the limit is reached the 
+   x-coordinate will stop incrementing.
+
+
+NOTE: The logics for this purpose may range from simple to highly complex algorithms... it is up 
+to you how you want your objects to move on the screen.
+
+      Similarly, try incrementing y-coordinate instead of x-coordinate.
+      
+      
+   ////ONE THAT YOU MUST KEEP IN MIND IS THAT THE ORIGIN OF THE GRAPHICS WINDOW IS AT THE UPPER LEFT
+   CORNER OF THE SCREEN AT THE X-AXIS IS POSITIVE FROM LEFT TO RIGTH AND Y-AXIS IS POSITIVE FROM 
+   TOP TO BOTTOM./////
+
+
+
+----->>>>>>> CONTROLLED MOVEMENTS
+
+For controlled movements you must make your code or program realize which key to sense and what to do
+if that key is sensed...
+
+Glass makes it easier for you, too.
+
+By using simple if logics you can do this...
+
+Take a look at this code.
+
+#include<glass.h>
+
+void main(int argc, char** argv)
+{
+MainWindowLoop(argc,argv,"Controls",500,600,"White");
+Endloop();
+}
+
+void myDisplaFunction()
+{
+ClearScreen();
+static int x =250;     //static... to enable them to retain their values ar every call.
+static int y =300;
+
+CreateCircle(x,y,20,"Red","Filled");
+
+if(SpecialKey==A_UP)     //If upper arrow key is press
+    y--;
+else if(SpecialKey==A_DOWN)   //If Lower arrow key is pressed
+    y++:
+else if(SpecialKey==A_LEFT)   //If Left arrow key is pressed
+    x--;
+else if(SpecialKey==A_RIGHT)    //If Right arrow key is pressed
+    x++;
+SpecialKey==0;     //Reinitiallize    
+RefreshScreen();
+}
+
+Now if you press the arrow keys the shope will start moving...
+
+You can try these codes, too...
+
+Try using the code.
+#include<glass.h>
+
+int x = 100, y = 100;              //global variables.
+
+void main(int argc, char** argv)
+{
+		mainWindow(argc, argv, 400, 500, "Black");
+}
+void myDisplayFunction()
+{
+	ScreenClear();
+	if (SpecialKey == A_UP)     //if the key UP is pressed then do.
+		y -= 5;
+	if (SpecialKey == A_DOWN)	//if the key DOWN is pressed then do.
+		y += 5;
+	if (SpecialKey == A_LEFT)	//if the key LEFT is pressed then do.
+		x-= 5;
+	if (SpecialKey == A_RIGHT) //if the key RIGHT is pressed then do.
+		x += 5;
+
+	SpecialKey = 0;                 //reinitiallization of special key.
+
+	CreateCircle(x, y, 100, "Green", "Hollow");
+	refreshScreen();
+}
+Run this code on your computer. Try pressing the arrow keys.
+Try experimenting something:
+>> try removing SpecialKey = 0, and see what will happen.
+>> try removing ScreenClear() and see what will happen.
+>>try removing both SpecialKey=0 and ScreenClear() at the same time and see what will happen. 
+
+
+>>>>>>>>>>Try another code:
+#include<glass.h>
+
+int x = 100, y = 100;              //global variables.
+int x1=200, y=200;         //global variables.
+void main(int argc, char** argv)
+{
+		mainWindow(argc, argv, 400, 500, "Black");
+}
+void myDisplayFunction()
+{
+	ScreenClear();
+	if (SpecialKey == A_UP)     //if the key UP is pressed then do.
+		y -= 5;
+	if (SpecialKey == A_DOWN)	//if the key DOWN is pressed then do.
+		y += 5;
+	if (SpecialKey == A_LEFT)	//if the key LEFT is pressed then do.
+		x-= 5;
+	if (SpecialKey == A_RIGHT) //if the key RIGHT is pressed then do.
+		x += 5;
+
+	SpecialKey = 0;                 //reinitiallization of special key.
+
+	CreateCircle(x, y, 100, "Green", "Hollow");
+	CreateRectangle(x1,y1,50,50, "Red", "Filled");	
+    x1 += 1;
+refreshScreen();
+}
+Try Experiment:
+>> Try replacing x1 with y1
+>> Try adding  y1+=1, below x1+=1;
+>> Try changing the increment constant of x1 (x1+=5). 
+>> try doing other experiments too.
+
+
+
+
+
+
+
+
 
 
                                    <<<<<<<<<<<<<<<<<<<<<<<<<<<<glass.h>>>>>>>>>>>>>>>>>>>>>>>>>>
