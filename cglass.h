@@ -121,7 +121,11 @@ namespace FundamentleGlass {
 		double slice_width;
 	};
 
+	struct Point2D {
 
+		double x;
+		double y;
+	};
 	//_____________________________________________---Support functions---________________________________________?//
 
 	void ScreenClear() // to clear screen
@@ -1690,6 +1694,9 @@ namespace FundamentleGlass {
 	  //________________________________________________________________________________________________________________?/
 
 
+
+
+
 namespace ObjectiveGlass {        //the objective glass start.
 
 	using namespace FundamentleGlass;
@@ -1771,8 +1778,8 @@ namespace ObjectiveGlass {        //the objective glass start.
 				FirstCall = true;
 			}
 			else;
-			if(CallMover==true)
-			mover();
+			if (CallMover == true)
+				mover();
 			CallMover = false;
 			glLineWidth(LineThickness);
 			DrawLine(lx2, ly2, lx1, ly1, Color);
@@ -1780,13 +1787,13 @@ namespace ObjectiveGlass {        //the objective glass start.
 
 		void DrawFloating(double LineCenter_x, double LineCenter_y, double Lenght, char*Color = "Red", unsigned int LineThickness = 1)
 		{
-				origin_x = LineCenter_x;
-				origin_y = LineCenter_y;
-				lx1 = LineCenter_x + Lenght / 2;
-				ly1 = LineCenter_y;
-				lx2 = LineCenter_x - Lenght / 2;
-				ly2 = LineCenter_y;
-				TotalLenght = Lenght;
+			origin_x = LineCenter_x;
+			origin_y = LineCenter_y;
+			lx1 = LineCenter_x + Lenght / 2;
+			ly1 = LineCenter_y;
+			lx2 = LineCenter_x - Lenght / 2;
+			ly2 = LineCenter_y;
+			TotalLenght = Lenght;
 			glLineWidth(LineThickness);
 			DrawLine(lx2, ly2, lx1, ly1, Color);
 		}  //End line
@@ -1809,8 +1816,8 @@ namespace ObjectiveGlass {        //the objective glass start.
 				FirstCall = true;
 			}
 			else;
-			if (CallMover==true)
-			mover();
+			if (CallMover == true)
+				mover();
 			CallMover = false;
 			Draw(origin_x, origin_y, totalLenght, Color, LineThickness);
 		}  //End line
@@ -1819,18 +1826,18 @@ namespace ObjectiveGlass {        //the objective glass start.
 		{
 			//static bool FirstCall = false;
 			double totalLenght = 0;
-				lx1 = x;
-				ly1 = y;
-				lx2 = x1;
-				ly2 = y1;
-				totalLenght = pow((x - x1), 2) + pow((y - y1), 2);
-				totalLenght = sqrt(totalLenght);
-				TotalLenght = totalLenght;
-				origin_x = (x + x1) / 2;
-				origin_y = (y + y1) / 2;
-				glLineWidth(LineThickness);
-				DrawLine(x, y, x1, y1, Color);
-				//DrawFloating(origin_x, origin_y, totalLenght, Color, LineThickness);
+			lx1 = x;
+			ly1 = y;
+			lx2 = x1;
+			ly2 = y1;
+			totalLenght = pow((x - x1), 2) + pow((y - y1), 2);
+			totalLenght = sqrt(totalLenght);
+			TotalLenght = totalLenght;
+			origin_x = (x + x1) / 2;
+			origin_y = (y + y1) / 2;
+			glLineWidth(LineThickness);
+			DrawLine(x, y, x1, y1, Color);
+			//DrawFloating(origin_x, origin_y, totalLenght, Color, LineThickness);
 		}  //End line
 
 
@@ -1931,10 +1938,17 @@ namespace ObjectiveGlass {        //the objective glass start.
 		}
 		//END
 
+		void Move(Point2D point)
+		{
+			CallMover = true;
+			speedx = point.x;
+			speedy = point.y;
+		}
+
 		// Interface of dynamic lenght chager
 		void ChangeLenght(double Lenght)
 		{
-		   	lx1 = origin_x + Lenght / 2;
+			lx1 = origin_x + Lenght / 2;
 			ly1 = origin_y;
 			lx2 = origin_x - Lenght / 2;
 			ly2 = origin_y;
@@ -1942,6 +1956,12 @@ namespace ObjectiveGlass {        //the objective glass start.
 		}
 		//END
 
+		void ChangeAxis(double axis_x, double axis_y) { 
+			axis_X = axis_x;axis_Y = axis_y ;
+		}
+        
+		void ChangeThickness(unsigned int LineThickness) { givenThickness = LineThickness; }
+		void ChangeColor(char* Color) { givenColor = Color; }
 		double GetCenter_x() { return origin_x; }
 		double GetCenter_y() { return origin_y; }
 		double GetPoint_x1() { return lx1; }
@@ -2005,6 +2025,14 @@ namespace ObjectiveGlass {        //the objective glass start.
 			CallMover = true;
 			speedx = x; speedy = y;
 		}                //
+		
+		void Move(Point2D point)
+		{
+			CallMover = true;
+			speedx = point.x;
+			speedy = point.y;
+		}
+
 		void Revolve(double x, double y, double angle)    //Revolve function
 		{
 			axis_X = x;
@@ -2016,7 +2044,16 @@ namespace ObjectiveGlass {        //the objective glass start.
 			origin_y = axis_Y + LineDistance*sin(radian);
 		}   //End function 
 
+		void ChangeAxis(double axis_x, double axis_y) {
+			axis_X = axis_x; axis_Y = axis_y;
+		}
 
+		void ChangeColor(char*Color) { givenColor = Color; }
+		void ChangeRadius(double radius) { givenRadius = radius; }
+		void ChangeState(char*state) { givenState = state; }
+		void ChangeThickness(unsigned int LineThickness) { givenThickness = LineThickness; }
+		double GetCenter_x() { return origin_x; }
+		double GetCenter_y() { return  origin_y; }
 
 
 	};    //END CIRCLE CLASS.
@@ -2160,11 +2197,19 @@ namespace ObjectiveGlass {        //the objective glass start.
 
         
 
-		void Move(double x, double y) {
-			CallMover = true;
+		void Move(double x, double y) {             //Interface for the Move funtion
+ 			CallMover = true;
 			speedx = x;
 			speedy = y;
+		}//END
+
+		void Move(Point2D point)
+		{
+			CallMover = true;
+			speedx = point.x;
+			speedy = point.y;
 		}
+
 
 		void Rotate(double angle)
 		{
@@ -2383,9 +2428,12 @@ namespace ObjectiveGlass {        //the objective glass start.
 			axis_X = axis_x; axis_Y = axis_y;
 		}
 
-		void ChangeHeight(double Height) { givenHeight += Height; }
-		void ChangeWidth(double Width) { givenWidth += Width; }
-		double GetCenter_x() { return origin_x; }
+		void ChangeColor(char* Color) { givenColor = Color; }                //Interface to change attributes on the run time.
+		void ChangeHeight(double Height) { givenHeight = Height; }
+		void ChangeWidth(double Width) { givenWidth = Width; }
+		void ChangeState(char* state) { givenState = state; }
+		void ChangeThickness(unsigned int LineThickness) { givenThickness = LineThickness; }
+		double GetCenter_x() { return origin_x; }                     // Interfaces to get different points of the shape on runtime.
 		double GetCenter_y() { return origin_y; }
 		double GetUpperLeft_x() { return UpperLeft_x; }
 		double GetUpperLeft_y() { return UpperLeft_y; }
