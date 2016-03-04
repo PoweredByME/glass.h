@@ -20,6 +20,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.*/
 // This code is Created by Ali Danish and Saad Ahmad. Students of NUST H-12 pakistan// 
 //#define _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
+#include<string>
 #include<Windows.h>
 #include<mmsystem.h>
 #include <glut.h>
@@ -1718,7 +1719,7 @@ namespace ObjectiveGlass {        //the objective glass start.
 		double axis_X = 0;                       //The axis X for the rotation of the shape
 		double axis_Y = 0;                       //The axis Y for the rotation of the shape
 		bool RotateCall = false; bool RevolveCall = false;       //Revolve and rotate first call noters 
-
+		bool mouseEnabled = false;
 	public:                       //Public Functions
 		virtual void Move(double x, double y) = 0;    //Function for movement of shape
 													  //virtual void Rotate(double angle) = 0;        //Function for Angle rotation of a shape
@@ -1748,6 +1749,27 @@ namespace ObjectiveGlass {        //the objective glass start.
 			double r = pow((lx1 - origin_x), 2) + pow((ly1 - origin_y), 2);
 			LineRadius = sqrt(r);
 		}
+        
+		double Slope,radiusLenght;
+		void getRadius()
+		{
+			radiusLenght = TotalLenght / 2;
+		}
+
+		void getSlope()
+		{
+			Slope = atan((ly1 - ly2) / (lx1 - lx2));
+		}
+		void mouser()
+		{
+			getSlope();
+			getRadius();
+			lx1 = origin_x + radiusLenght*cos(M_PI + Slope);
+			ly1 = origin_y + radiusLenght*sin(M_PI + Slope);   // MATHS FOR ROTATION
+			lx2 = origin_x + radiusLenght*cos(Slope);
+			ly2 = origin_y + radiusLenght*sin(Slope);
+
+		}
 
 	public:      //Public characteristics.
 		~LINE() {
@@ -1776,11 +1798,16 @@ namespace ObjectiveGlass {        //the objective glass start.
 				ly2 = LineCenter_y;
 				TotalLenght = Lenght;
 				FirstCall = true;
+				Amotion_x = origin_x;
+				Amotion_y = origin_y;
 			}
 			else;
 			if (CallMover == true)
 				mover();
 			CallMover = false;
+			if (mouseEnabled == true)
+				mouser();
+			mouseEnabled = false;
 			glLineWidth(LineThickness);
 			DrawLine(lx2, ly2, lx1, ly1, Color);
 		}  //End line
@@ -1804,21 +1831,27 @@ namespace ObjectiveGlass {        //the objective glass start.
 			//static bool FirstCall = false;
 			double totalLenght = 0;
 			if (FirstCall == false) {    //When the call is first...
-				lx1 = x;
-				ly1 = y;
-				lx2 = x1;
-				ly2 = y1;
+				lx1 = x1;
+				ly1 = y1;
+				lx2 = x;
+				ly2 = y;
 				totalLenght = pow((x - x1), 2) + pow((y - y1), 2);
 				totalLenght = sqrt(totalLenght);
 				TotalLenght = totalLenght;
 				origin_x = (x + x1) / 2;
 				origin_y = (y + y1) / 2;
 				FirstCall = true;
+				Amotion_x = origin_x;
+				Amotion_y = origin_y;
 			}
 			else;
 			if (CallMover == true)
 				mover();
 			CallMover = false;
+			if (mouseEnabled == true)
+				mouser();
+			mouseEnabled = false;
+
 			Draw(origin_x, origin_y, totalLenght, Color, LineThickness);
 		}  //End line
 
@@ -1946,18 +1979,34 @@ namespace ObjectiveGlass {        //the objective glass start.
 		}
 
 		// Interface of dynamic lenght chager
-		void ChangeLenght(double Lenght)
+		void changeLenghtFromRight(double x_delta_Lenght = 0, double y_delta_Lenght = 0)
 		{
-			lx1 = origin_x + Lenght / 2;
-			ly1 = origin_y;
-			lx2 = origin_x - Lenght / 2;
-			ly2 = origin_y;
-			TotalLenght = Lenght;
+			lx1 += x_delta_Lenght;
+			ly1 += y_delta_Lenght;
+			TotalLenght = sqrt(pow((lx1 - lx2), 2) + pow((ly1-ly2),2));
+		}
+		void changeLenghtFromLeft(double x_delta_Lenght = 0, double y_delta_Lenght = 0)
+		{
+			lx2 -= x_delta_Lenght;
+			ly2 -= y_delta_Lenght;
+			TotalLenght = sqrt(pow((lx1 - lx2), 2) + pow((ly1 - ly2), 2));
+		}
+		void changeLenghtFromCenter(double Lenght)
+		{
+			lx2 -= Lenght/2;
+			lx1 += Lenght/2;
+			TotalLenght = sqrt(pow((lx1 - lx2), 2) + pow((ly1 - ly2), 2));
 		}
 		//END
 
 		void ChangeAxis(double axis_x, double axis_y) { 
 			axis_X = axis_x;axis_Y = axis_y ;
+		}
+
+		void EnableMouse(int MOUSE_CONTROLLED_X, int MOUSE_CONTROLLED_Y) {
+			origin_y = MOUSE_CONTROLLED_Y;
+			origin_x = MOUSE_CONTROLLED_X;
+			mouseEnabled = true;
 		}
         
 		void ChangeThickness(unsigned int LineThickness) { givenThickness = LineThickness; }
@@ -2005,6 +2054,9 @@ namespace ObjectiveGlass {        //the objective glass start.
 				FirstCall = true;
 				origin_x = x; origin_y = y; givenRadius = radius;
 				givenColor = color; givenState = state; givenThickness = LineThickness;
+				Amotion_x = origin_x;
+				Amotion_y = origin_y;
+
 			}
 			else;
 			if(CallMover==true)
@@ -2047,14 +2099,20 @@ namespace ObjectiveGlass {        //the objective glass start.
 		void ChangeAxis(double axis_x, double axis_y) {
 			axis_X = axis_x; axis_Y = axis_y;
 		}
+        
+		void EnableMouse(int MOUSE_CONTROLLED_X, int MOUSE_CONTROLLED_Y)
+		{
+			origin_x = MOUSE_CONTROLLED_X;
+			origin_y = MOUSE_CONTROLLED_Y;
+		}
 
 		void ChangeColor(char*Color) { givenColor = Color; }
-		void ChangeRadius(double radius) { givenRadius = radius; }
+		void ChangeRadius(double radius) { givenRadius += radius; }
 		void ChangeState(char*state) { givenState = state; }
 		void ChangeThickness(unsigned int LineThickness) { givenThickness = LineThickness; }
 		double GetCenter_x() { return origin_x; }
 		double GetCenter_y() { return  origin_y; }
-
+		double GetRadius() { return givenRadius; }
 
 	};    //END CIRCLE CLASS.
 
@@ -2070,6 +2128,7 @@ namespace ObjectiveGlass {        //the objective glass start.
 		double LowerLeft_x = 0, LowerLeft_y = 0, LowerRight_x = 0, LowerRight_y = 0;
 		double ULR = 0, URR = 0, LLR = 0, LRR = 0;
 		double givenAngle;
+		bool changeHeight = false, changeWidth = false;
 		bool DrawCall = false;
 		bool CallMover = false;
 		bool AngleCall = false;
@@ -2088,6 +2147,40 @@ namespace ObjectiveGlass {        //the objective glass start.
 
 		}
 
+		bool oc = false; 
+		bool owl = false, owr = false;
+		bool ocu = false;
+
+		void Changer()
+		{
+			if (oc == true)
+			{
+				origin_y += givenHeight / 2;
+			}
+			if (ocu == true)
+			{
+				origin_y -= givenHeight / 2;
+			}
+			if (owl == true)
+			{
+				origin_x -= givenWidth / 2;
+			}
+			if (owr == true)
+			{
+				origin_x += givenWidth / 2;
+			}
+			UpperLeft_x = origin_x - givenWidth / 2;
+			UpperLeft_y = origin_y - givenHeight / 2;
+
+			UpperRight_x = UpperLeft_x + givenWidth;
+			UpperRight_y = UpperLeft_y;
+			LowerLeft_x = UpperLeft_x;
+			LowerLeft_y = UpperLeft_y + givenHeight;
+			LowerRight_x = UpperLeft_x + givenWidth;
+			LowerRight_y = UpperLeft_y + givenHeight;
+			
+		}
+
 		void mover()    //the mover function;
 		{
 			origin_x += speedx; origin_y += speedy;
@@ -2096,6 +2189,19 @@ namespace ObjectiveGlass {        //the objective glass start.
 			LowerLeft_x += speedx; LowerLeft_y += speedy;
 			LowerRight_x += speedx; LowerRight_y += speedy;
 			axis_X += speedx; axis_Y += speedy;
+		}
+
+		
+		void mouser()
+		{
+			UpperLeft_x = origin_x - givenWidth / 2;
+			UpperLeft_y = origin_y - givenHeight / 2;
+			UpperRight_x = UpperLeft_x + givenWidth;
+			UpperRight_y = UpperLeft_y;
+			LowerLeft_x = UpperLeft_x;
+			LowerLeft_y = UpperLeft_y + givenHeight;
+			LowerRight_x = UpperLeft_x + givenWidth;
+			LowerRight_y = UpperLeft_y + givenHeight;
 		}
 
 		void sqRotate(double angle) {                                       //Function to rotate the square"if needed"
@@ -2186,11 +2292,19 @@ namespace ObjectiveGlass {        //the objective glass start.
 				URR = sqrt(pow((origin_x - UpperRight_x), 2) + pow((origin_y - UpperRight_y), 2));
 				LLR = sqrt(pow((origin_x - LowerLeft_x), 2) + pow((origin_y - LowerLeft_y), 2));
 				LRR = sqrt(pow((origin_x - LowerRight_x), 2) + pow((origin_y - LowerRight_y), 2));
-
+				Amotion_x = origin_x;
+				Amotion_y = origin_y;
 			}
 			if(CallMover== true)
 			mover();
 			CallMover = false;
+			if (mouseEnabled = true)
+				mouser();
+			mouseEnabled = false;
+			if (changeHeight == true || changeWidth == true)
+				Changer();
+			changeHeight = false;
+			changeWidth = false;
 			Maker1();
 
 		}
@@ -2423,16 +2537,55 @@ namespace ObjectiveGlass {        //the objective glass start.
 
 		}
 
+		void EnableMouse(int MOUSE_CONTROLLED_X, int MOUSE_CONTROLLED_Y)
+		{
+			mouseEnabled = true;
+			origin_x = MOUSE_CONTROLLED_X;
+			origin_y = MOUSE_CONTROLLED_Y;
+		}
+
 		void ChangeAxis(double axis_x, double axis_y)
 		{
 			axis_X = axis_x; axis_Y = axis_y;
 		}
 
 		void ChangeColor(char* Color) { givenColor = Color; }                //Interface to change attributes on the run time.
-		void ChangeHeight(double Height) { givenHeight = Height; }
-		void ChangeWidth(double Width) { givenWidth = Width; }
+		void changeHeightFromCenter(double Height) { 
+			changeHeight = true;
+		    givenHeight += Height; givenWidth += 0;
+		}
+		void changeWidthFromCenter(double Width) { 
+			changeWidth = true;
+		givenWidth += Width;
+        }
+		void changeHeightFromBottom(double Height)
+		{
+			changeHeight = true;
+			oc = true;
+			givenHeight += Height; givenWidth += 0;
+		}
+		void changeHeightFromTop(double Height)
+		{
+			changeHeight = true;
+			ocu = true;
+			givenHeight += Height; givenWidth += 0;
+		}
+		void changeWidthFromLeft(double Width)
+		{
+			changeWidth = true;
+			owl = true;
+			givenWidth += Width; givenHeight += 0;
+		}
+		void changeWidthFromRight(double Width)
+		{
+			changeWidth = true;
+			owr = true;
+			givenWidth += Width; givenHeight += 0;
+		}
 		void ChangeState(char* state) { givenState = state; }
 		void ChangeThickness(unsigned int LineThickness) { givenThickness = LineThickness; }
+		double GetHeight() { return givenHeight; }
+		double GetWidht() { return givenWidth; }
 		double GetCenter_x() { return origin_x; }                     // Interfaces to get different points of the shape on runtime.
 		double GetCenter_y() { return origin_y; }
 		double GetUpperLeft_x() { return UpperLeft_x; }
@@ -2445,4 +2598,4 @@ namespace ObjectiveGlass {        //the objective glass start.
 		double GetLowerRight_y() { return LowerRight_y; }
 	};
 
-}    //END NAMESPACE OBJECTIVEGLASS
+}    //END NAMESPACE OBJECTIVEGLAS
