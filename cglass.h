@@ -2441,6 +2441,16 @@ namespace ObjectiveGlass
             Text(originX, originY, t, c, f, fs, s);
 		}
 
+		void Write(double text)
+		{
+			Text(originX, originY, text, c, f, fs, s);
+		}
+
+		void Write(int text)
+		{
+			Text(originX, originY, text, c, f, fs, s);
+		}
+
 		void setColor(string theColor)
 		{
 			color = theColor;
@@ -2741,19 +2751,6 @@ namespace ObjectiveGlass
 			slope.URLLSlope = atan((UpperRightY - LowerLeftY) / (UpperRightX - LowerLeftX));
 		}
 
-		void MouseProcess()
-		{
-			getSlope1();
-			UpperLeftX = CenterX + ULRadius*cos(M_PI + slope.ULLRSlope);
-			UpperLeftY = CenterY + ULRadius*sin(M_PI + slope.ULLRSlope);
-			LowerRightX = CenterX + LRRadius*cos(slope.ULLRSlope);
-			LowerRightY = CenterY + LRRadius*sin(slope.ULLRSlope);
-			UpperRightX = CenterX + URRadius*cos(slope.URLLSlope);
-			UpperRightY = CenterY + URRadius*sin(slope.URLLSlope);
-			LowerLeftX = CenterX + LLRadius*cos(M_PI + slope.URLLSlope);
-			LowerLeftY = CenterY + LLRadius*sin(M_PI + slope.URLLSlope);
-		}
-
 		void calculateRadius()
 		{
 			ULRadius = getPathagorus(CenterX, CenterY, UpperLeftX, UpperLeftY);
@@ -2780,8 +2777,8 @@ namespace ObjectiveGlass
 			LowerRightY = CenterY + LRRadius*sin(1 * M_PI / 4 + radian);
 			UpperRightX = CenterX + URRadius*cos(-1*M_PI/4 + radian);
 			UpperRightY = CenterY + URRadius*sin(-1 * M_PI / 4 + radian);
-			LowerLeftX = CenterX + LLRadius*cos( 4/4 *M_PI - M_PI/4 + radian);
-			LowerLeftY = CenterY + LLRadius*sin(4/4 *M_PI - M_PI / 4+radian);
+			LowerLeftX = CenterX + LLRadius*cos( M_PI - M_PI/4 + radian);
+			LowerLeftY = CenterY + LLRadius*sin( M_PI - M_PI / 4+radian);
 		}
 
 		void ProcessChange()
@@ -2864,14 +2861,12 @@ namespace ObjectiveGlass
 		{
 			CenterX = x;
 			CenterY = y;
-			MouseProcess();
 		}
 
 		void Move(double X, double Y) 
 		{
 			CenterX += X;
 			CenterY += Y;
-			MouseProcess();
 		}
 	
 		void Rotate(double angleInDegree)
