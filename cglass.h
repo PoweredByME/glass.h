@@ -2781,6 +2781,19 @@ namespace ObjectiveGlass
 			LowerLeftY = CenterY + LLRadius*sin( M_PI - M_PI / 4+radian);
 		}
 
+		void RotateProcessX()
+		{
+			double radian = 0;
+			UpperLeftX = CenterX - ULRadius*cos(M_PI / 4 + radian);
+			UpperLeftY = CenterY - ULRadius*sin(M_PI / 4 + radian);
+			LowerRightX = CenterX + LRRadius*cos(1 * M_PI / 4 + radian);
+			LowerRightY = CenterY + LRRadius*sin(1 * M_PI / 4 + radian);
+			UpperRightX = CenterX + URRadius*cos(-1 * M_PI / 4 + radian);
+			UpperRightY = CenterY + URRadius*sin(-1 * M_PI / 4 + radian);
+			LowerLeftX = CenterX + LLRadius*cos(M_PI - M_PI / 4 + radian);
+			LowerLeftY = CenterY + LLRadius*sin(M_PI - M_PI / 4 + radian);
+		}
+
 		void ProcessChange()
 		{
 			UpperRightX = UpperLeftX + (this->width);
@@ -2799,11 +2812,26 @@ namespace ObjectiveGlass
 		double pos_x, pos_y;
 		double bh , bw ;
 
-
 	public:
-		sprite() {}
-		void LoadSprite(string ImagePath)
+		sprite() {
+			FirstCall = false;
+		}
+		void LoadSprite(string ImagePath, double UpperLeftX = 0, double UpperLeftY = 0 , double Height = 0, double Width = 0)
 		{
+			this->UpperLeftX = UpperLeftX;
+			this->UpperLeftY = UpperLeftY;
+			height = Height;
+			width = Width;
+			UpperRightX = UpperLeftX + (this->width);
+			UpperRightY = UpperLeftY;
+			LowerRightX = UpperRightX;
+			LowerRightY = UpperRightY + this->height;
+			LowerLeftX = UpperLeftX;
+			LowerLeftY = UpperLeftY + this->height;
+			calculateCenter();
+			pos_x = UpperLeftX; pos_y = UpperLeftY;
+			bh = height; bw = width;
+			calculateRadius();
 			FirstCall = true;
 			theImage = LoadImage(const_cast<char*>(ImagePath.c_str()));
 		}
@@ -2867,12 +2895,23 @@ namespace ObjectiveGlass
 		{
 			CenterX += X;
 			CenterY += Y;
-		}
+			RotateProcessX();
+        }
 	
 		void Rotate(double angleInDegree)
 		{
 			rotateAngle = -1 * angleInDegree;
 			RotateProcess();
+		}
+
+		bool isMouseHover()
+		{
+			return (Pmotion_x >= UpperLeftX && Pmotion_x <= UpperRightX && Pmotion_y >= UpperLeftY && Pmotion_y <= LowerLeftY);
+		}
+		
+		void resetTriggers()
+		{
+			FirstCall = false;
 		}
 
 		double getUpperLeftX() { return UpperLeftX; }
@@ -2887,6 +2926,18 @@ namespace ObjectiveGlass
 		double getCenterY() { return CenterY; }
 		void setHeight(double Height) { height = Height; ProcessChange(); }
 		void setWidth(double Width) { width = Width; ProcessChange(); }
+		void setCenter(double X, double Y) {
+			CenterX = X; CenterY = Y;
+		}
+		void setUpperLeftX(double X) { UpperLeftX = X; }
+		void setUpperLeftY(double Y) { UpperLeftY = Y; }
+		void setUpperRightX(double X) { UpperRightX = X; }
+		void setUpperRightY(double Y) { UpperRightY = Y; }
+		void setLowerRightX(double X) { LowerRightX = X; }
+		void setLowerRightY(double Y) { LowerRightY = Y; }
+		void setLowerLeftX(double X) { LowerLeftX = X; }
+		void setLowerLeftY(double Y) { LowerLeftY = Y; }
+
 		GLuint getGLuint() { return theImage; }
 
 	};
