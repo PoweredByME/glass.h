@@ -1,0 +1,164 @@
+
+
+
+                       What is cglass.h? 
+                       
+                       
+                       It is a graphics library, derived from the well known graphic library glut.h.
+        The liberary specializes in the 2D graphics animation and game developing. There are a lot of other
+        graphics liberaries like SDL , SFML , OpenGL and glut.h itself but why use cglass.h or the older 
+        version glass.h?
+        
+             Answer is one word, simplicity. Everything has its perks, glut.h or OpenGL and huge vast and 
+        virtually you can do anything in them but they have one dark side. Code Complexity. Their code 
+        is highly complex and you have learn quite a lot of thing to even make a rectangle or a circle. 
+        Let alone load a sprite, which is a huge hassel their.
+              
+            You don't want that, you want to implement cool graphics but you don't want to get into a 
+        difficult and bug prone code. " cglass.h is your thing  "
+        
+            cglass.h is a successor of glass.h and they both are derived from glut.h. So, you have the liberty
+        to use either the features of cglass, glass, or even glut. This liberary provides you with everything
+        to go up and runnin'. 
+        
+        
+      ---------------> the CGLASS.H:-
+      
+      
+          How to install it:-
+      
+      -> You must have a visual studio, atleast vs2010. vs2013 or vs2015 are the best 
+        choice.
+      -> Download the files from this repository.
+      -> Go to the <<   https://code.google.com/p/rawvideoplayer/downloads/detail?name=glut-3.7.6-bin.zip&can=2   >> 
+      link to fetch glut.h liberary files.
+      -> Now, if you have everything in you computer and you want to add the files in such a way
+         that you can use them in any project you want without a hassel then follow the following steps. 
+         otherwise add them manually in your every project.
+      
+      
+      -> HOWEVER, if you DON'T want that hassel, then:
+      
+  >> Open the bin folder using windows 10 or 7zip or Winrar
+  
+  >> Copy the glut32.dll file to C:\Windows\System32 and C:\Windows\System.
+     (i.e. Go to OS file or C file, the go to windows folder, then search for system32 and paste glut32.dll in it, then 
+    go back to windows folder and search for system folder and paste the glut32.dll in it)
+    
+  >> Go back to the glut folder. Copy the glut.lib (Object File Liberary) and the goto the program files(x86) if you are using visual 
+  studio 2013 then search for folder Microsoft Visual Studio 12.0 and select it. Now goto folder VC, then in it goto folder lib and paste 
+  glut.lib in it.
+  
+  >> Now, come back to glut folder, copy glut.h (header file), then go back to the folder Microsoft Visual Studio 12.0
+  , then goto folder VC, in it select folder VC, and then go to the folder include and paste glut.h in it.
+  
+  >> Now go to glass.h folder, copy glass.h (header file) and cglass.h in the same folder(include) where
+  you have pasted glut.h.
+  
+  
+       >> Hopefully the glass.h will run on your visual studio.
+       
+       @happy #include<cglass.h> 
+       
+       
+  
+  
+  
+>>>>>>>>>>>>  HOW TO CODE :-
+  
+  
+     Now, to get directly on the point that we want to use cglass and makes some graphics. 
+     The most interesting and cool thing for the 2D graphics is to be able to use the sprites. 
+     
+     For now just understand that sprites are images which you can use in your 2D graphics development.
+     
+    
+  <-> Which type of Spirte to use in cglass.h?
+  
+      -> The formate of that sprite should be .tga.
+      -> Its dimensions should be in 2 raised to the power
+      (like 256 X 256 , 512 X 512 , 1024 X 1024 , 1024 X 512 etc)
+        it depends on the quality of image you want and how you want to use it.
+        
+    ((NOTE:: Keep in mind, that, the greater the dimensions of the image(sprite) , the more RAM 
+     will be used ))
+     
+  <-> What if my Image formate and dimension are not appropreate?
+  
+     Well, there is a very handy solution. 
+     
+     >> Goto this site <<<  http://image.online-convert.com/convert-to-tga  >>>
+     >> Click the choose file button and browse you image and select it.
+     >> Then set the desired pixels and if you want then set the other attributes.
+     
+     >> Click the button convert file.
+     >> The file will be converted and will be downloaded or it download link will be 
+        provided.
+        
+        
+    (( NOTE : Sometimes the image will not be completely converted and cglass.h will not be 
+       use it. It is highly unlikly but if that happens try converting it again. This will 
+       remove the error. ))
+       
+    >> Then include it in you project file and the image is ready is ready to be used in 
+       cglass.h code.
+       
+     
+  
+  
+    CODE:
+    
+    Now, we get to the coding part. 
+    
+    Suppose I have the image file, named "World" with formate .tga.
+    
+    #include<cglass.h>
+    
+    using namespace ObjectiveGlass;
+    
+    int main(int argc, char ** argv)
+    {
+    
+    mainWindowLoop(argc, argv);     // Creates the main window with default attributes.
+    
+    EndLoop();       // Ends the Loop.
+    }
+    
+    void myDisplayFunction()     //Essential function. You graphics code lies here.
+    {
+    
+    ClearScreen();       // Clears the screen for every loop
+    RefreshScreen();    // Refresh the screen for every loop;
+    
+    }
+    
+    
+    Now we have written the most essential and basic code.
+    If you compile it and run it, then you will get a window with black background.
+    Now to add a sprite.
+    
+    #include<cglass.h>
+    
+    using namespace ObjectiveGlass;
+    
+    sprite mySprite;     //a globle variable.
+    
+    int main(int argc, char ** argv)
+    {
+    
+    mainWindowLoop(argc, argv);     // Creates the main window with default attributes.
+    mySprite.LoadSprite("World.tga");   // loads the sprite.
+    EndLoop();       // Ends the Loop.
+    }
+    
+    void myDisplayFunction()     //Essential function. You graphics code lies here.
+    {
+    
+    ClearScreen();       // Clears the screen for every loop
+    mySprite.setLocation(10,10,100,100);  //sets the location of the image, with height and width.
+    mySprite.Draw();      //displays the image 
+    RefreshScreen();    // Refresh the screen for every loop;
+    
+    }
+    
+    Compile it and run it you will see you image (sprite).    
