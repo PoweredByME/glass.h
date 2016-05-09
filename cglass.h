@@ -372,8 +372,8 @@ namespace FundamentleGlass
 		else
 			glClearColor(0.0, 0.0, 0.0, 0.0);		//background color of openGl window
 													//			 ^red, green, blue, alpha(opens) 
-		glMatrixMode(GL_PROJECTION);		//glMatrixMode — specify which matrix is the current matrix ????
-		glLoadIdentity();		//glLoadIdentity — replace the current matrix with the identity matrix	????
+		glMatrixMode(GL_PROJECTION);		//glMatrixMode ó specify which matrix is the current matrix ????
+		glLoadIdentity();		//glLoadIdentity ó replace the current matrix with the identity matrix	????
 
 		glOrtho(0.0, g_Width, 0.0, g_Height, -1.0, 1.0);
 
@@ -480,8 +480,8 @@ namespace FundamentleGlass
 		else
 			glClearColor(0.0, 0.0, 0.0, 0.0);		//background color of openGl window
 													//			 ^red, green, blue, alpha(opens) 
-		glMatrixMode(GL_PROJECTION);		//glMatrixMode — specify which matrix is the current matrix ????
-		glLoadIdentity();		//glLoadIdentity — replace the current matrix with the identity matrix	????
+		glMatrixMode(GL_PROJECTION);		//glMatrixMode ó specify which matrix is the current matrix ????
+		glLoadIdentity();		//glLoadIdentity ó replace the current matrix with the identity matrix	????
 
 		glOrtho(0.0, g_Width, 0.0, g_Height, -1.0, 1.0);
 
@@ -2889,6 +2889,7 @@ namespace ObjectiveGlass
 		{
 			CenterX = x;
 			CenterY = y;
+			RotateProcess();
 		}
 
 		void Move(double X, double Y) 
