@@ -2896,7 +2896,7 @@ namespace ObjectiveGlass
 		{
 			CenterX += X;
 			CenterY += Y;
-			RotateProcessX();
+			RotateProcess();
         }
 	
 		void Rotate(double angleInDegree)
