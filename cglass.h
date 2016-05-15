@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 #define _CRT_SECURE_NO_WARNINGS
 #include<Windows.h>
 #include<mmsystem.h>
@@ -372,8 +373,8 @@ namespace FundamentleGlass
 		else
 			glClearColor(0.0, 0.0, 0.0, 0.0);		//background color of openGl window
 													//			 ^red, green, blue, alpha(opens) 
-		glMatrixMode(GL_PROJECTION);		//glMatrixMode ó specify which matrix is the current matrix ????
-		glLoadIdentity();		//glLoadIdentity ó replace the current matrix with the identity matrix	????
+		glMatrixMode(GL_PROJECTION);		//glMatrixMode — specify which matrix is the current matrix ????
+		glLoadIdentity();		//glLoadIdentity — replace the current matrix with the identity matrix	????
 
 		glOrtho(0.0, g_Width, 0.0, g_Height, -1.0, 1.0);
 
@@ -480,8 +481,8 @@ namespace FundamentleGlass
 		else
 			glClearColor(0.0, 0.0, 0.0, 0.0);		//background color of openGl window
 													//			 ^red, green, blue, alpha(opens) 
-		glMatrixMode(GL_PROJECTION);		//glMatrixMode ó specify which matrix is the current matrix ????
-		glLoadIdentity();		//glLoadIdentity ó replace the current matrix with the identity matrix	????
+		glMatrixMode(GL_PROJECTION);		//glMatrixMode — specify which matrix is the current matrix ????
+		glLoadIdentity();		//glLoadIdentity — replace the current matrix with the identity matrix	????
 
 		glOrtho(0.0, g_Width, 0.0, g_Height, -1.0, 1.0);
 
@@ -2241,7 +2242,8 @@ namespace ObjectiveGlass
 		void Move(double x, double y) {
 			CenterX += x;
 			CenterY += y;
-			MoveProcess();
+			//MoveProcess();
+			RotateProcess();
 		}
 
 		void Rotate(double angleInDegree)
@@ -2295,7 +2297,7 @@ namespace ObjectiveGlass
 		double getUpperRightX() { return UpperRightX; }
 		double getUpperRightY() { return UpperRightY; }
 		double getLowerRightX() { return LowerRightX; }
-		double getLowerRightY() { return LowerRightX; }
+		double getLowerRightY() { return LowerRightY; }
 		double getCenterX() { return CenterX; }
 		double getCenterY() { return CenterY; }
 		void setUpperLeftX(double X) {
@@ -2429,7 +2431,7 @@ namespace ObjectiveGlass
 			this->fontSize = "Large";
 			this->state = "Normal";
 			s = const_cast<char*>(state.c_str());
-            c = const_cast<char*>(this->color.c_str());
+			c = const_cast<char*>(this->color.c_str());
 			f = const_cast<char*>(font.c_str());
 			fs = const_cast<char*>(fontSize.c_str());
 		}
@@ -2438,7 +2440,7 @@ namespace ObjectiveGlass
 		{
 			TheText = text;
 			char * t = const_cast<char*>(TheText.c_str());
-            Text(originX, originY, t, c, f, fs, s);
+			Text(originX, originY, t, c, f, fs, s);
 		}
 
 		void Write(double text)
@@ -2711,11 +2713,11 @@ namespace ObjectiveGlass
 				Text += "/";
 			else if (Keyboard == '?')
 				Text += "?";
-				Keyboard = 0;
-				Text1 = Text;
-				Text12(originX, originY, const_cast<char*>(Text1.c_str()), c, f, fs, s);
-			
-				return this->Text1;
+			Keyboard = 0;
+			Text1 = Text;
+			Text12(originX, originY, const_cast<char*>(Text1.c_str()), c, f, fs, s);
+
+			return this->Text1;
 		}
 	};    //end class text
 
@@ -2771,14 +2773,14 @@ namespace ObjectiveGlass
 		void RotateProcess()
 		{
 			double radian = rotateAngle * M_PI / 180;
-			UpperLeftX = CenterX - ULRadius*cos(M_PI/4+ radian);
-			UpperLeftY = CenterY - ULRadius*sin(M_PI/4 +radian);
+			UpperLeftX = CenterX - ULRadius*cos(M_PI / 4 + radian);
+			UpperLeftY = CenterY - ULRadius*sin(M_PI / 4 + radian);
 			LowerRightX = CenterX + LRRadius*cos(1 * M_PI / 4 + radian);
 			LowerRightY = CenterY + LRRadius*sin(1 * M_PI / 4 + radian);
-			UpperRightX = CenterX + URRadius*cos(-1*M_PI/4 + radian);
+			UpperRightX = CenterX + URRadius*cos(-1 * M_PI / 4 + radian);
 			UpperRightY = CenterY + URRadius*sin(-1 * M_PI / 4 + radian);
-			LowerLeftX = CenterX + LLRadius*cos( M_PI - M_PI/4 + radian);
-			LowerLeftY = CenterY + LLRadius*sin( M_PI - M_PI / 4+radian);
+			LowerLeftX = CenterX + LLRadius*cos(M_PI - M_PI / 4 + radian);
+			LowerLeftY = CenterY + LLRadius*sin(M_PI - M_PI / 4 + radian);
 		}
 
 		void RotateProcessX()
@@ -2810,13 +2812,13 @@ namespace ObjectiveGlass
 
 		bool FirstCall;
 		double pos_x, pos_y;
-		double bh , bw ;
+		double bh, bw;
 
 	public:
 		sprite() {
 			FirstCall = false;
 		}
-		void LoadSprite(string ImagePath, double UpperLeftX = 0, double UpperLeftY = 0 , double Height = 0, double Width = 0)
+		void LoadSprite(string ImagePath, double UpperLeftX = 0, double UpperLeftY = 0, double Height = 0, double Width = 0)
 		{
 			this->UpperLeftX = UpperLeftX;
 			this->UpperLeftY = UpperLeftY;
@@ -2889,16 +2891,15 @@ namespace ObjectiveGlass
 		{
 			CenterX = x;
 			CenterY = y;
-			RotateProcess();
 		}
 
-		void Move(double X, double Y) 
+		void Move(double X, double Y)
 		{
 			CenterX += X;
 			CenterY += Y;
 			RotateProcess();
-        }
-	
+		}
+
 		void Rotate(double angleInDegree)
 		{
 			rotateAngle = -1 * angleInDegree;
@@ -2909,7 +2910,7 @@ namespace ObjectiveGlass
 		{
 			return (Pmotion_x >= UpperLeftX && Pmotion_x <= UpperRightX && Pmotion_y >= UpperLeftY && Pmotion_y <= LowerLeftY);
 		}
-		
+
 		void resetTriggers()
 		{
 			FirstCall = false;
